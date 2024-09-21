@@ -8,7 +8,6 @@ import logoImage from '../assets/NookLogo.png';
 const Register: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [error, setError] = useState('');
 
@@ -24,15 +23,25 @@ const Register: React.FC = () => {
     event.preventDefault();
 
     if (isValidEmail) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const token = userCredential.user.getIdToken();
-          localStorage.setItem('authToken', token as unknown as string); 
-          navigate('/complete-signup');
+      fetch('/signup/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === 'success') {
+            localStorage.setItem('authToken', data.uid);
+            navigate('/complete-signup');
+          } else {
+            setError(data.error || 'Failed to register. Please try again.');
+          }
         })
         .catch((error) => {
-          setError('Failed to register. Please try again.');
           console.error('Error during registration:', error);
+          setError('Failed to register. Please try again.');
         });
     } else {
       setError('Please enter a valid email');
@@ -52,16 +61,6 @@ const Register: React.FC = () => {
               placeholder="Enter Email" 
               value={email} 
               onChange={handleEmailChange} 
-              required 
-            />
-          </div>
-          <div className="register-input-container">
-            <label>Password</label>
-            <input 
-              type="password" 
-              placeholder="Enter Password" 
-              value={password} 
-              onChange={(event) => setPassword(event.target.value)} 
               required 
             />
           </div>
