@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebaseConfig'; 
 import '../css/Register.css';
 import logoImage from '../assets/NookLogo.png'; 
 
@@ -40,7 +38,6 @@ const Register: React.FC = () => {
           }
         })
         .catch((error) => {
-          console.error('Error during registration:', error);
           setError('Failed to register. Please try again.');
         });
     } else {
