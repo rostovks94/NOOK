@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import MoodBoardPreview from '../components/MoodBoardPreview';
 import SaveModal from '../components/SaveModal';
+import MoodBoardSelection from '../views/MoodBoardSelection'; // Новый компонент
 import '../css/MainFeed.css';
 import logoImage from '../assets/NookLogo.png';
 
 import LikeIcon from '../assets/LikeIcon.png';
+import MessageIcon from '../assets/message-icon.jpeg'; // Иконка сообщения
 import ShareIcon from '../assets/ShareIcon.png';
 import CommentIcon from '../assets/CommentIcon.png';
 import SaveIcon from '../assets/SaveIcon.png';
+import homeIcon from '../assets/home-icon.png';
+import profileIcon from '../assets/profile-icon.png';
+import uploadIcon from '../assets/upload-icon.png';
+import settingsIcon from '../assets/settings-icon.png';
 
 import { fetchInteriorPhotos } from '../services/pexelsService';
 
 const MainFeed: React.FC = () => {
   const navigate = useNavigate();
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false); // Управление модальным окном
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
 
@@ -26,19 +33,11 @@ const MainFeed: React.FC = () => {
   }, [navigate]);
 
   const handleProfileClick = (username: string) => {
-    if (username === 'Yelena_Jones') {
-      navigate(`/user-profile/${username}`); 
-    } else {
-      navigate(`/user-profile/${username}`);
-    }
-  };
-
-  const handleAvatarClick = () => {
-    navigate('/personalprofile');
+    navigate(`/user-profile/${username}`);
   };
 
   const handleSaveClick = () => {
-    setModalOpen(true);
+    setModalOpen(true); // Открываем модальное окно
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +49,16 @@ const MainFeed: React.FC = () => {
       const results = await fetchInteriorPhotos(searchTerm);
       setSearchResults(results);
     }
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  const closeModal = () => {
+    setModalOpen(false); // Закрываем модальное окно
   };
 
   const renderUserCard = (username: string, userImageClass: string, contentClass: string) => (
@@ -75,7 +84,7 @@ const MainFeed: React.FC = () => {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              handleSaveClick();
+              handleSaveClick(); // Клик по кнопке Save открывает модальное окно
             }}
           >
             <img src={SaveIcon} alt="Save" />
@@ -89,8 +98,9 @@ const MainFeed: React.FC = () => {
     <div className="main-feed">
       <div className="logo-avatar-container">
         <img src={logoImage} alt="Nook Logo" className="nook-logo" />
-        <div className="avatar-container" onClick={handleAvatarClick}>
-          <div className="empty-avatar"></div>
+        <div className="avatar-container">
+          <img src={LikeIcon} alt="Like Icon" className="header-icon" /> {/* Иконка лайка */}
+          <img src={MessageIcon} alt="Message Icon" className="header-icon" /> {/* Иконка сообщения */}
         </div>
       </div>
 
@@ -101,7 +111,10 @@ const MainFeed: React.FC = () => {
           className="search-input"
           value={searchTerm}
           onChange={handleSearchChange}
+          onKeyPress={handleKeyPress} // Поиск при нажатии Enter
         />
+        {/* Кликабельная иконка лупы */}
+        <div className="search-icon" onClick={handleSearch}></div> {/* Поиск при клике на лупу */}
       </div>
 
       <button className="quiz-button take-quiz-button">Take Style Quiz</button>
@@ -125,12 +138,32 @@ const MainFeed: React.FC = () => {
           </div>
           {renderUserCard('TammyDecorQueen', 'user-profile2', 'sampleimage-content')}
           {renderUserCard('JeremyAllenDesigns', 'user-profile3', 'sampleimage1-content')}
-          {renderUserCard('Yelena_Jones', 'user-profile4', 'sampleimage2-content')} 
+          {renderUserCard('Yelena_Jones', 'user-profile4', 'sampleimage2-content')}
           {renderUserCard('VintageHouseDesigns', 'user-profile5', 'sampleimage3-content')}
         </>
       )}
 
-      {isModalOpen && <SaveModal onClose={() => setModalOpen(false)} />}
+      {isModalOpen && <MoodBoardSelection onClose={closeModal} />} {/* Включаем компонент MoodBoardSelection */}
+
+      {/* Footer Menu */}
+      <footer className="footer-navigation">
+        <Link to="/home" className="footer-menu-item">
+          <img src={homeIcon} alt="Home" />
+          <span>Home</span>
+        </Link>
+        <Link to="/personalprofile" className="footer-menu-item">
+          <img src={profileIcon} alt="Profile" />
+          <span>Profile</span>
+        </Link>
+        <Link to="/upload" className="footer-menu-item">
+          <img src={uploadIcon} alt="Upload" />
+          <span>Upload</span>
+        </Link>
+        <Link to="/settings" className="footer-menu-item">
+          <img src={settingsIcon} alt="Settings" />
+          <span>Settings</span>
+        </Link>
+      </footer>
     </div>
   );
 };

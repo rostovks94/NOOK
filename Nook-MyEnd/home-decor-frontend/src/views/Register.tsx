@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'; 
+import { auth } from '../../firebaseConfig'; 
 import '../css/Register.css';
 import logoImage from '../assets/NookLogo.png'; 
 
@@ -45,6 +47,19 @@ const Register: React.FC = () => {
     }
   };
 
+  const handleGoogleSignUp = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const token = await result.user.getIdToken();
+      localStorage.setItem('authToken', token);
+      navigate('/mainfeed');
+    } catch (error) {
+      setError('Failed to register with Google. Please try again.');
+      console.error('Error during Google Sign-Up:', error);
+    }
+  };
+
   return (
     <div className="register-page">
       <div className="register-overlay"></div>
@@ -64,7 +79,9 @@ const Register: React.FC = () => {
           {error && <p className="error-message">{error}</p>}
           <button type="submit" className="register-create-account-button">Sign Up</button>
           <div className="register-divider"><span>OR</span></div>
-          <button type="button" className="register-google-signup-button">Sign Up with Google</button>
+          <button type="button" className="register-google-signup-button" onClick={handleGoogleSignUp}>
+            Sign Up with Google
+          </button>
           <button type="button" className="register-login-button" onClick={() => navigate('/login')}>Login</button>
         </form>
       </div>

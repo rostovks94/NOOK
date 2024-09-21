@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../firebaseConfig'; 
 import '../css/Login.css'; 
 import NookLogo from '../assets/NookLogo.png';
@@ -24,6 +24,19 @@ const Login: React.FC = () => {
         setError('Invalid email or password. Please try again.');
         console.error('Error during login:', error);
       });
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const token = await result.user.getIdToken();
+      localStorage.setItem('authToken', token);
+      navigate('/mainfeed');
+    } catch (error) {
+      setError('Failed to login with Google. Please try again.');
+      console.error('Error during Google Login:', error);
+    }
   };
 
   return (
@@ -57,7 +70,9 @@ const Login: React.FC = () => {
           {error && <p className="error-message">{error}</p>}
           <button type="submit" className="login-button">Login</button>
           <div className="divider"><span>OR</span></div>
-          <button type="button" className="google-login-button">Login with Google</button>
+          <button type="button" className="google-login-button" onClick={handleGoogleLogin}>
+            Login with Google
+          </button>
           <button type="button" className="signup-button" onClick={() => navigate('/register')}>Sign Up</button>
         </form>
       </div>

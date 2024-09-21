@@ -33,10 +33,11 @@ html, body {
   justify-content: flex-start;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
+  padding: 0;
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
 }
 
 .main-feed::-webkit-scrollbar {
@@ -50,6 +51,7 @@ html, body {
   position: relative;
   width: 100%;
   padding: 10px;
+  margin-top: 80px;
 }
 
 .nook-logo {
@@ -58,23 +60,22 @@ html, body {
   transform: translateX(-50%);
   width: 107px;
   height: 45px;
-  margin-top: 80px;
+  margin-top: 20px;
 }
 
 .avatar-container {
   position: absolute;
   right: 20px;
+  display: flex;
+  gap: 15px;
   cursor: pointer;
-  margin-top: -20px;
+  margin-top: 20px;
+  margin-right: 20px;
 }
 
-.empty-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-  background-color: #f0f0f0;
-  margin-top: 100px;
+.header-icon {
+  width: 30px;
+  height: 30px;
 }
 
 .search-bar {
@@ -85,6 +86,7 @@ html, body {
   margin-top: 100px;
   width: 353px;
   height: 40px;
+  position: relative; /* чтобы кнопка находилась внутри поля поиска */
 }
 
 .search-bar input[type="text"] {
@@ -97,11 +99,17 @@ html, body {
   font-weight: 600;
   color: #ADA9A9;
   outline: none;
-  padding-right: 40px;
-  background-image: url('../assets/search-icon.png');
+  padding-right: 40px; /* добавляем место для иконки */
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px; /* иконка лупы внутри поля поиска */
+  width: 24px;
+  height: 24px;
   background-repeat: no-repeat;
-  background-position: right 20px center;
-  background-size: 22px 21px;
+  background-size: contain;
+  cursor: pointer;
 }
 
 .quiz-button {
@@ -279,4 +287,43 @@ html, body {
 
 .sampleimage3-content {
   background-image: url('../assets/SampleImage3.jpeg');
+}
+
+.footer-navigation {
+  display: flex;
+  justify-content: space-around;
+  padding: 0; 
+  background-color: white;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border: 2px solid #004d3a;
+  box-sizing: border-box;
+}
+
+.footer-menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #004d3a;
+  padding: 10px 0;
+  flex-grow: 1;
+  border-left: 2px solid #004d3a;
+  box-sizing: border-box;
+}
+
+.footer-menu-item:first-child {
+  border-left: none;
+}
+
+.footer-menu-item img {
+  width: 24px;
+  height: auto;
+}
+
+.footer-menu-item span {
+  font-size: 12px;
+  margin-top: 5px;
 }
