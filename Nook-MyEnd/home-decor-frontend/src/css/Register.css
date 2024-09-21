@@ -20,8 +20,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  max-width: 393px;
+  width: 393px; 
   height: 100vh;
   max-height: 852px;
   padding: 40px;
@@ -158,6 +157,7 @@ body {
 
 @media (max-width: 768px) {
   .register-page {
+    width: 100%; 
     max-width: 100%;
     padding: 20px;
   }
