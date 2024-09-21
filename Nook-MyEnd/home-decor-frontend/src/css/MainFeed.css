@@ -1,0 +1,282 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  background-color: white;
+  font-family: 'Arial', sans-serif;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+#root::-webkit-scrollbar {
+  display: none;
+}
+
+.main-feed {
+  width: 393px;
+  height: 852px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.main-feed::-webkit-scrollbar {
+  display: none;
+}
+
+.logo-avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding: 10px;
+}
+
+.nook-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 107px;
+  height: 45px;
+  margin-top: 80px;
+}
+
+.avatar-container {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+  margin-top: -20px;
+}
+
+.empty-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background-color: #f0f0f0;
+  margin-top: 100px;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0 16px;
+  margin-top: 100px;
+  width: 353px;
+  height: 40px;
+}
+
+.search-bar input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #2f4f4f;
+  border-radius: 30px;
+  font-size: 16px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  color: #ADA9A9;
+  outline: none;
+  padding-right: 40px;
+  background-image: url('../assets/search-icon.png');
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  background-size: 22px 21px;
+}
+
+.quiz-button {
+  background-color: #96fd35;
+  color: #2f4f4f;
+  font-weight: 400;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16pt;
+  padding: 15px 30px;
+  border-radius: 50px;
+  border: 2px solid #2f4f4f;
+  cursor: pointer;
+  margin: 16px auto;
+  width: 353px;
+  height: 60px;
+}
+
+.quiz-button:hover {
+  background-color: #b0dc32;
+  color: #2f4f4f;
+}
+
+.moodboard-header {
+  font-size: 24pt;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  text-align: left;
+  width: 100%;
+  color: #000000 !important;
+  margin: 24px 0 10px 10px;
+}
+
+.moodboard-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  gap: 10px;
+}
+
+.moodboard-container .moodboard-preview {
+  width: 30%;
+  text-align: center;
+}
+
+.moodboard-container img {
+  width: 104px;
+  height: 104px;
+}
+
+.moodboard-container p {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.user-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  margin-bottom: -15px;
+  width: 100%;
+}
+
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  margin-top: 0px;
+}
+
+.user-info h2 {
+  margin: 0;
+  font-size: 16px;
+  margin-top: 0px;
+}
+
+.user-content {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 300px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.user-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  width: 100%;
+}
+
+.user-actions button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.user-actions .action-left {
+  display: flex;
+  gap: 10px;
+}
+
+.user-actions .action-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-actions button img {
+  width: 24px;
+  height: 24px;
+  margin-top: -30px;
+}
+
+.user-profile1,
+.user-profile2,
+.user-profile3,
+.user-profile4,
+.user-profile5 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+.user-profile1 {
+  background-image: url('../assets/user-profile1.jpg');
+}
+
+.user-profile2 {
+  background-image: url('../assets/user-profile2.jpg');
+}
+
+.user-profile3 {
+  background-image: url('../assets/user-profile3.jpg');
+}
+
+.user-profile4 {
+  background-image: url('../assets/user-profile4.jpg');
+}
+
+.user-profile5 {
+  background-image: url('../assets/user-profile5.jpg');
+}
+
+.bluecouch-content {
+  background-image: url('../assets/bluecouch.jpg');
+}
+
+.sampleimage-content {
+  background-image: url('../assets/SampleImage.jpeg');
+}
+
+.sampleimage1-content {
+  background-image: url('../assets/SampleImage1.jpeg');
+}
+
+.sampleimage2-content {
+  background-image: url('../assets/SampleImage2.jpeg');
+}
+
+.sampleimage3-content {
+  background-image: url('../assets/SampleImage3.jpeg');
+}
