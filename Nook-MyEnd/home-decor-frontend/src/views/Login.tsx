@@ -1,30 +1,35 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/Login.css'; // Подключаем стили для страницы
-import NookLogo from '../assets/NookLogo.png'; // Импортируем логотип
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebaseConfig'; 
+import '../css/Login.css'; 
+import NookLogo from '../assets/NookLogo.png';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
 
-    // Простая проверка для заглушки
-    if (email && password) {
-      localStorage.setItem('authToken', 'dummyToken'); // Устанавливаем фиктивный токен
-      navigate('/mainfeed'); // Переход на MainFeed
-    } else {
-      alert('Please enter a valid email and password');
-    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const token = userCredential.user.getIdToken();
+        localStorage.setItem('authToken', token as unknown as string); 
+        navigate('/mainfeed');
+      })
+      .catch((error) => {
+        setError('Invalid email or password. Please try again.');
+        console.error('Error during login:', error);
+      });
   };
 
   return (
     <div className="login-page">
-      <div className="login-overlay"></div> {/* Фон */}
+      <div className="login-overlay"></div>
       <div className="login-container">
-        {/* Логотип через изображение с классом */}
         <div className="login-logo">
           <img src={NookLogo} alt="Nook Logo" className="logo-image" />
         </div>
@@ -49,21 +54,11 @@ const Login: React.FC = () => {
               required
             />
           </div>
-          <button type="submit" className="login-button">
-            Login
-          </button>
-
-          <div className="divider">
-            <span>OR</span>
-          </div>
-
-          <button type="button" className="google-login-button">
-            Login with Google
-          </button>
-
-          <button type="button" className="signup-button" onClick={() => navigate('/register')}>
-            Sign Up
-          </button>
+          {error && <p className="error-message">{error}</p>}
+          <button type="submit" className="login-button">Login</button>
+          <div className="divider"><span>OR</span></div>
+          <button type="button" className="google-login-button">Login with Google</button>
+          <button type="button" className="signup-button" onClick={() => navigate('/register')}>Sign Up</button>
         </form>
       </div>
     </div>

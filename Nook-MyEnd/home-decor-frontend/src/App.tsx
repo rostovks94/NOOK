@@ -1,26 +1,22 @@
 import React from 'react';
 import { HashRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-
 import MainFeed from './views/MainFeed'; 
 import ContentDetail from './views/ContentDetail';
 import MoodBoardSelection from './views/MoodBoardSelection'; 
 import CreateMoodBoard from './views/CreateMoodBoard'; 
 import SaveConfirmation from './views/SaveConfirmation'; 
-import UserProfile from './views/PH4'; // Используем PH4 для профиля пользователя
+import UserProfile from './views/PH4';
 import Register from './views/Register';
 import Login from './views/Login'; 
 import CompleteSignUp from './views/CompleteSignUp';
 import PersonalProfile from './views/PersonalProfile';
 import SaveModal from './components/SaveModal'; 
 
-// Проверка аутентификации
 const isAuthenticated = () => {
   const token = localStorage.getItem('authToken');
-  console.log("Auth Token:", token);
   return !!token;
 };
 
-// Компонент для приватных роутов
 const PrivateRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
   return isAuthenticated() ? children : <Navigate to="/login" replace />;
 };

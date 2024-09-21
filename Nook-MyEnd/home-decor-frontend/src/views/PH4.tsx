@@ -2,16 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/PH4.css';
 
-import logoImage from '../assets/NookLogo.png'; // Импорт логотипа
-import profileImage from '../assets/user-profile4.jpg'; // Импорт аватарки профиля
+import logoImage from '../assets/NookLogo.png'; 
+import profileImage from '../assets/user-profile4.jpg'; 
 
-// Импорт иконок для нижнего меню
+
 import homeIcon from '../assets/home-icon.png';
 import profileIcon from '../assets/profile-icon.png';
 import uploadIcon from '../assets/upload-icon.png';
 import settingsIcon from '../assets/settings-icon.png';
 
-// Импорт изображений для сетки
+
 import pink1 from '../assets/Pink1.jpeg';
 import pink2 from '../assets/Pink2.jpeg';
 import pink3 from '../assets/Pink3.jpeg';
@@ -27,9 +27,9 @@ const PH4: React.FC = () => {
   return (
     <div className="container">
       
-      {/* Контент, который будет прокручиваться, включая логотип */}
+    
       <div className="scrollable-content">
-        <img src={logoImage} alt="Nook Logo" className="nook-logo4" /> {/* Логотип */}
+        <img src={logoImage} alt="Nook Logo" className="nook-logo4" /> 
 
         <div className="profile-page">
           <header className="profile-header">
@@ -42,7 +42,7 @@ const PH4: React.FC = () => {
           </div>
           </header>
 
-          {/* Кнопка Follow под текстом профиля */}
+    
           <button className="follow-btn">Follow</button>
 
           <div className="tabs">
@@ -70,7 +70,7 @@ const PH4: React.FC = () => {
         </div>
       </div>
 
-      {/* Нижняя навигация */}
+ 
       <footer className="bottom-navigation">
         <Link to="/mainfeed">
           <img src={homeIcon} alt="Home" />

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from django.views.generic import TemplateView  # Для рендеринга index.html
+from django.views.generic import TemplateView  
 
 from users import views
 from users.views import like_post, comment_post, share_post, save_post, create_post
@@ -16,6 +16,5 @@ urlpatterns = [
     path('save/', save_post, name='save_post'),
     path('create_post/', create_post, name='create_post'),
 
-    # Указываем маршрут для рендеринга index.html
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
 ]

@@ -7,7 +7,7 @@ import eclecticModernImage from '../assets/ElectricModern.jpg';
 import plusIcon from '../assets/plus.png';
 
 interface MoodBoardSelectionProps {
-  onClose: () => void;
+  onClose: () => void;  
 }
 
 const MoodBoardSelection: React.FC<MoodBoardSelectionProps> = ({ onClose }) => {
@@ -15,11 +15,11 @@ const MoodBoardSelection: React.FC<MoodBoardSelectionProps> = ({ onClose }) => {
     <div className="moodboard-selection-modal">
       <div className="moodboard-overlay" onClick={onClose}></div>
       <div className="modal-content">
-        <button className="close-button" onClick={onClose}>×</button>
+        <button className="close-button" onClick={onClose}>×</button> 
         
         <h1>Save to Board</h1>
         
-        <input type="text" placeholder="Search" className="search-input" />
+        <input type="text" placeholder="Search" className="search-input" /> 
         
         <div className="moodboard-list">
           <div className="moodboard-item">
@@ -37,7 +37,7 @@ const MoodBoardSelection: React.FC<MoodBoardSelectionProps> = ({ onClose }) => {
 
           <button
             className="create-board-button"
-            onClick={() => window.location.href = '/create-moodboard'}
+            onClick={() => window.location.href = '/create-moodboard'}  
           >
             <img src={plusIcon} alt="Create Mood Board Icon" />
             Create Mood Board

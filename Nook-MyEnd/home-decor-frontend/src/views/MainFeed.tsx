@@ -27,7 +27,7 @@ const MainFeed: React.FC = () => {
 
   const handleProfileClick = (username: string) => {
     if (username === 'Yelena_Jones') {
-      navigate(`/user-profile/${username}`); // перенаправляем на страницу PH4
+      navigate(`/user-profile/${username}`); 
     } else {
       navigate(`/user-profile/${username}`);
     }
@@ -125,7 +125,7 @@ const MainFeed: React.FC = () => {
           </div>
           {renderUserCard('TammyDecorQueen', 'user-profile2', 'sampleimage-content')}
           {renderUserCard('JeremyAllenDesigns', 'user-profile3', 'sampleimage1-content')}
-          {renderUserCard('Yelena_Jones', 'user-profile4', 'sampleimage2-content')} {/* Не кликабельно */}
+          {renderUserCard('Yelena_Jones', 'user-profile4', 'sampleimage2-content')} 
           {renderUserCard('VintageHouseDesigns', 'user-profile5', 'sampleimage3-content')}
         </>
       )}

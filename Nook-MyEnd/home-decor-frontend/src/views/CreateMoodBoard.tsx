@@ -11,7 +11,6 @@ const CreateMoodBoard: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Навигация с правильным использованием `basename`
     navigate('/home-decor-app/save-confirmation'); 
   };
 

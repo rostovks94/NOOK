@@ -10,33 +10,29 @@ const CompleteSignUp: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const completeSignUpProcess = () => {
-    // Проверяем, что все поля заполнены и пароли совпадают
     const success = email !== '' && username !== '' && password !== '' && password === confirmPassword;
 
     if (success) {
-      // Сохраняем токен в localStorage
       localStorage.setItem('authToken', 'yourTokenValue'); 
       
-      // Проверяем, что токен успешно сохранен
       const savedToken = localStorage.getItem('authToken');
       if (savedToken) {
-        console.log('Auth token saved:', savedToken); // Лог сохраненного токена
-        // Переходим на страницу mainfeed
+        console.log('Auth token saved:', savedToken); 
         navigate('/mainfeed');
       } else {
         console.error('Failed to save auth token');
         alert('Something went wrong. Please try again.');
       }
     } else {
-      // Показываем сообщение об ошибке
+
       console.error('Sign-up process failed');
       alert('Please make sure all fields are filled and passwords match.');
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // Предотвращаем перезагрузку страницы
-    completeSignUpProcess(); // Вызов функции завершения регистрации
+    e.preventDefault(); 
+    completeSignUpProcess(); 
   };
 
   return (

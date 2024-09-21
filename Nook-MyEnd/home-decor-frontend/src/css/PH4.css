@@ -1,4 +1,4 @@
-/* Общий контейнер */
+
 .container {
     width: 393px;
     height: 852px;
@@ -9,22 +9,22 @@
     overflow: hidden;
   }
   
-  /* Контент с прокруткой */
+
   .scrollable-content {
     flex-grow: 1;
-    overflow-y: auto; /* Включаем прокрутку для всего содержимого */
+    overflow-y: auto; 
     padding: 20px;
     box-sizing: border-box;
-    scrollbar-width: none; /* Убираем видимость прокрутки для Firefox */
-    -ms-overflow-style: none; /* Убираем видимость прокрутки для IE и Edge */
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
   }
   
-  /* Скрываем видимую прокрутку для WebKit (Chrome, Safari) */
+
   .scrollable-content::-webkit-scrollbar {
     display: none;
   }
   
-  /* Логотип */
+
   .nook-logo4 {
     position: absolute;
     left: 50%;
@@ -34,52 +34,52 @@
     margin-top: 20px;
   }
   
-  /* Стандартные настройки для элементов профиля */
+ 
   .profile-header {
     display: flex;
     align-items: left;
     justify-content: space-between;
-    margin-bottom: 20px; /* Отступ между профилем и логотипом */
+    margin-bottom: 20px;
   }
   
   .profile-info {
     display: flex;
-    flex-direction: column; /* Ставим элементы друг под другом */
-    align-items: flex-start; /* Выравнивание по левому краю */
+    flex-direction: column; 
+    align-items: flex-start; 
     margin-top: 5px;
   }
   
   .profile-img {
-    width: 100px; /* Ширина аватарки */
-    height: 100px; /* Высота аватарки */
-    border-radius: 50%; /* Округление аватара */
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%; 
     margin-top: 100px;
-    object-fit: cover; /* Сохраняет пропорции, изображение заполнит контейнер */
-    align-self: flex-start; /* Располагает аватарку слева */
+    object-fit: cover; 
+    align-self: flex-start; 
   }
   
   .profile-details h2 {
     font-size: 16px;
     margin-top: 10px;
-    font-weight: 400; /* Тонкий шрифт */
-    text-align: left; /* Выравнивание текста влево */
+    font-weight: 400;
+    text-align: left; 
 
   }
   .profile-details p {
-    text-align: left; /* Выравнивание текста влево */
+    text-align: left; 
   }
 
   .follow-btn {
-    background-color: #c2f33a; /* Зеленый фон */
-    color: #2f4f4f; /* Черный цвет текста */
-    border: 2px solid #2f4f4f; /* Зелёная рамка */
-    border-radius: 20px; /* Округлые углы */
-    padding: 10px 25px; /* Просторные отступы внутри кнопки */
+    background-color: #c2f33a; 
+    color: #2f4f4f; 
+    border: 2px solid #2f4f4f; 
+    border-radius: 20px; 
+    padding: 10px 25px;
     cursor: pointer;
-    font-size: 16px; /* Размер текста */
-    font-weight: 400; /* Тонкий шрифт */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Плавные переходы */
-    margin: 5px 0px; /* Добавляем отступ сверху и снизу, чтобы расположить кнопку между текстом профиля и навигацией */
+    font-size: 16px; 
+    font-weight: 400; 
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+    margin: 5px 0px; 
     display: block;
     
   }
@@ -99,10 +99,10 @@
     border-bottom: 2px solid #ff99cc;
   }
   
-  /* Сетка изображений */
+
   .content-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 столбца */
+    grid-template-columns: repeat(3, 1fr); 
     gap: 10px;
     width: 100%;
   }
@@ -113,7 +113,7 @@
     object-fit: cover;
   }
   
-  /* Нижняя навигация */
+
   .bottom-navigation {
     display: flex;
     justify-content: space-around;

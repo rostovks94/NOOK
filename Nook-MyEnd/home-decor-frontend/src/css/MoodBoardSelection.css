@@ -1,5 +1,5 @@
 .moodboard-selection-modal {
-  position: fixed; /* Меняем на fixed, чтобы окно было фиксировано на экране */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
@@ -10,14 +10,14 @@
   z-index: 1000;
 }
 
-/* Добавляем затемняющий overlay */
+
 .moodboard-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+  background: rgba(0, 0, 0, 0.5); 
   z-index: 999;
 }
 
@@ -28,7 +28,7 @@
   width: 100%;
   max-width: 450px;
   max-height: 90vh;
-  overflow-y: auto; /* Прокрутка, если содержимого слишком много */
+  overflow-y: auto; 
   box-sizing: border-box;
   position: relative;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);

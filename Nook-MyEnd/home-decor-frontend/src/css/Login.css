@@ -43,11 +43,11 @@ body {
     position: relative;
     z-index: 2;
     width: 100%;
-    padding-top: 150px; /* Это оставляем для общего отступа */
+    padding-top: 150px; 
 }
 
 .login-logo {
-    width: 200px; /* Увеличим ширину логотипа */
+    width: 200px; 
     height: auto;
     display: block;
     margin: 0 auto;
@@ -59,13 +59,13 @@ body {
   }
   
   .logo-image {
-    width: 100%; /* Логотип занимает 100% ширины родительского контейнера */
+    width: 100%; 
     height: auto;
   }
 
-/* Опускаем контейнеры и кнопки */
+
 .login-form {
-    margin-top: 100px; /* Добавляем отступ, чтобы опустить форму ниже */
+    margin-top: 100px; 
 }
 
 .login-input-container {
@@ -146,7 +146,7 @@ body {
     content: '';
     flex: 1;
     border-bottom: 2px solid #00593F;
-    margin: 0 10px; /* Обеспечивает отступы для псевдоэлементов */
+    margin: 0 10px; 
 }
 
 .divider span {
@@ -154,11 +154,11 @@ body {
     font-weight: bold;
     color: #00593F;
     text-align: center;
-    white-space: nowrap; /* Оставляет текст в одной строке */
+    white-space: nowrap; 
     z-index: 1;
    
-    padding: 0 10px; /* Отступы вокруг текста "OR" */
-    position: relative; /* Необходим для правильного перекрытия линии */
+    padding: 0 10px; 
+    position: relative; 
 }
 
 .google-login-button {
