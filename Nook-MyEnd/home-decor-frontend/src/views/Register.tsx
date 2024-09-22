@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import logoImage from '../assets/NookLogo.png'; // Импортируем изображение логотипа
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth'; 
 import { auth } from '../firebaseConfig'; 
 import '../css/Register.css';
-import logoImage from '../assets/NookLogo.png'; 
+
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
