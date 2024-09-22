@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebaseConfig'; 
-import '../css/Login.css'; 
-import NookLogo from '../assets/NookLogo.png'; 
-=======
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from '../../firebaseConfig'; 
-import '../css/Login.css'; 
+import { auth } from '../firebaseConfig';
+import '../css/Login.css';
 import NookLogo from '../assets/NookLogo.png';
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -24,14 +17,10 @@ const Login: React.FC = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const token = userCredential.user.getIdToken();
-        localStorage.setItem('authToken', token as unknown as string); 
+        localStorage.setItem('authToken', token as unknown as string);
         navigate('/mainfeed');
       })
       .catch((error) => {
-<<<<<<< HEAD
-=======
-        // Type-asserting 'error' to FirebaseError to access 'code'
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
         if (error instanceof Error && 'code' in error) {
           const firebaseError = error as { code: string };
           
@@ -49,33 +38,6 @@ const Login: React.FC = () => {
       });
   };
 
-<<<<<<< HEAD
-=======
-  const handleGoogleLogin = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const token = await result.user.getIdToken();
-      localStorage.setItem('authToken', token);
-      navigate('/mainfeed');
-    } catch (error) {
-      // Type-asserting 'error' to FirebaseError to access 'code'
-      if (error instanceof Error && 'code' in error) {
-        const firebaseError = error as { code: string };
-        
-        if (firebaseError.code === 'auth/account-exists-with-different-credential') {
-          setError('This email is associated with a different login method. Try logging in with another account.');
-        } else {
-          setError('Failed to login with Google. Please try again.');
-        }
-      } else {
-        setError('An unknown error occurred. Please try again.');
-      }
-      console.error('Error during Google Login:', error);
-    }
-  };
-
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
   return (
     <div className="login-page">
       <div className="login-overlay"></div>
@@ -107,12 +69,6 @@ const Login: React.FC = () => {
           {error && <p className="error-message">{error}</p>}
           <button type="submit" className="login-button">Login</button>
           <div className="divider"><span>OR</span></div>
-<<<<<<< HEAD
-=======
-          <button type="button" className="google-login-button" onClick={handleGoogleLogin}>
-            Login with Google
-          </button>
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
           <button type="button" className="signup-button" onClick={() => navigate('/register')}>Sign Up</button>
         </form>
       </div>
@@ -120,8 +76,4 @@ const Login: React.FC = () => {
   );
 };
 
-<<<<<<< HEAD
 export default Login;
-=======
-export default Login;
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c

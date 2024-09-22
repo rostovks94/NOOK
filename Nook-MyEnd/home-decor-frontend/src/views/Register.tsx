@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
-import logoImage from '../assets/NookLogo.png'; // Импортируем изображение логотипа
-=======
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
 import { useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth'; 
-import { auth } from '../firebaseConfig'; 
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 import '../css/Register.css';
-<<<<<<< HEAD
-
-=======
-import logoImage from '../assets/NookLogo.png'; 
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
+import logoImage from '../assets/NookLogo.png';
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -32,13 +24,11 @@ const Register: React.FC = () => {
 
     if (isValidEmail) {
       try {
-        // Use createUserWithEmailAndPassword for registration with email
-        const userCredential = await createUserWithEmailAndPassword(auth, email, ''); // No password provided
+        const userCredential = await createUserWithEmailAndPassword(auth, email, '');
         const token = await userCredential.user.getIdToken();
         localStorage.setItem('authToken', token);
         navigate('/complete-signup');
       } catch (error: any) {
-        // Handle different registration errors
         if (error.code === 'auth/email-already-in-use') {
           setError('This email is already registered. Please use a different email or sign in to your account.');
         } else {
@@ -68,7 +58,7 @@ const Register: React.FC = () => {
           </div>
           {error && <p className="error-message">{error}</p>}
           <button type="submit" className="register-create-account-button">Sign Up</button>
-          <div className="register-divider"><span>OR</span></div> {/* Разделитель OR */}
+          <div className="register-divider"><span>OR</span></div>
           <button type="button" className="register-login-button" onClick={() => navigate('/login')}>Sign In</button>
         </form>
       </div>
