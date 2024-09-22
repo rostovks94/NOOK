@@ -21,7 +21,20 @@ const Login: React.FC = () => {
         navigate('/mainfeed');
       })
       .catch((error) => {
-        setError('Invalid email or password. Please try again.');
+        // Type-asserting 'error' to FirebaseError to access 'code'
+        if (error instanceof Error && 'code' in error) {
+          const firebaseError = error as { code: string };
+          
+          if (firebaseError.code === 'auth/user-not-found') {
+            setError('This email is not registered. Please sign up or try a different email.');
+          } else if (firebaseError.code === 'auth/wrong-password') {
+            setError('Incorrect password. Please try again.');
+          } else {
+            setError('Login failed. Please check your credentials and try again.');
+          }
+        } else {
+          setError('An unknown error occurred. Please try again.');
+        }
         console.error('Error during login:', error);
       });
   };
@@ -34,7 +47,18 @@ const Login: React.FC = () => {
       localStorage.setItem('authToken', token);
       navigate('/mainfeed');
     } catch (error) {
-      setError('Failed to login with Google. Please try again.');
+      // Type-asserting 'error' to FirebaseError to access 'code'
+      if (error instanceof Error && 'code' in error) {
+        const firebaseError = error as { code: string };
+        
+        if (firebaseError.code === 'auth/account-exists-with-different-credential') {
+          setError('This email is associated with a different login method. Try logging in with another account.');
+        } else {
+          setError('Failed to login with Google. Please try again.');
+        }
+      } else {
+        setError('An unknown error occurred. Please try again.');
+      }
       console.error('Error during Google Login:', error);
     }
   };
