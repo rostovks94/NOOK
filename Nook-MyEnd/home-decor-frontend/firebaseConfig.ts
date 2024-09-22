@@ -1,14 +1,15 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, setPersistence, browserLocalPersistence } from "firebase/auth";
 
+// Используем переменные из .env
 const firebaseConfig = {
-  apiKey: "AIzaSyCXqXjA1K47NXMDoo3BMOEfr8Yt7cwbfVI",
-  authDomain: "nook-aa562.firebaseapp.com",
-  projectId: "nook-aa562",
-  storageBucket: "nook-aa562.appspot.com",
-  messagingSenderId: "1089641107584",
-  appId: "1:1089641107584:web:e5cf8586c346ba8b45d665",
-  measurementId: "G-04SWWQYJP3",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
