@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import logoImage from '../assets/NookLogo.png'; // Импортируем изображение логотипа
+=======
+>>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth'; 
 import { auth } from '../firebaseConfig'; 
 import '../css/Register.css';
+<<<<<<< HEAD
 
+=======
+import logoImage from '../assets/NookLogo.png'; 
+>>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
