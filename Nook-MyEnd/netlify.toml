@@ -1,0 +1,15 @@
+[build]
+base = "Nook-MyEnd/home-decor-frontend"  # Указываем путь к папке с фронтендом
+publish = "Nook-MyEnd/home-decor-frontend/dist"  # Указываем папку для публикации
+command = "npm run build"  # Указываем команду для сборки
+
+[build.environment]
+NODE_ENV = "production"
+
+[dev]
+framework = "vite"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200

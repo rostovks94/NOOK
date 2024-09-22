@@ -1,0 +1,342 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  background-color: white;
+  font-family: 'Arial', sans-serif;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Изменено с center на flex-start */
+  height: 100%; 
+  width: 100%;
+  overflow-y: auto; /* Разрешаем вертикальную прокрутку */
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+#root::-webkit-scrollbar {
+  display: none;
+}
+
+.main-feed {
+  width: 393px;
+  /* Убираем фиксированную высоту */
+  /* height: 852px; */ 
+  min-height: 100vh; /* Минимальная высота 100% видимого экрана */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 0 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.main-feed::-webkit-scrollbar {
+  display: none;
+}
+
+
+.logo-avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding: 0 10px;
+  margin-top: 20px; /* Корректируем отступ сверху */
+}
+
+.nook-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 107px;
+  height: 45px;
+  margin-top: 60px;
+}
+
+.avatar-container {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  gap: 15px;
+  cursor: pointer;
+  margin-top: 0px;
+}
+
+.header-icon {
+  width: 30px;
+  height: 30px;
+  margin-top: 60px;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 80px 0 16px; 
+  width: 100%;
+  height: 40px;
+  position: relative;
+}
+
+.search-bar input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #2f4f4f;
+  border-radius: 30px;
+  font-size: 16px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  color: #ADA9A9;
+  outline: none;
+  padding-right: 40px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.quiz-button {
+  background-color: #b3ff02;
+  color: #2f4f4f;
+  font-weight: 400;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16pt;
+  padding: 15px 30px;
+  border-radius: 50px;
+  border: 2px solid #2f4f4f;
+  cursor: pointer;
+  margin: 10px auto;
+  margin-top: 0px;
+  width: 100%;
+  height: 60px;
+}
+
+.quiz-button:hover {
+  color: #2f4f4f;
+}
+
+.moodboard-header {
+  font-size: 24pt;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400 !important;
+  text-align: left;
+  width: 100%;
+  color: #000000 !important;
+  margin: -40px 0 10px;
+}
+
+.moodboard-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.moodboard-container .moodboard-preview {
+  width: 30%;
+  text-align: center;
+}
+
+.moodboard-container img {
+  width: 104px;
+  height: 104px;
+}
+
+.moodboard-container p {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.user-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-sizing: border-box;
+  margin-bottom: 40px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: -15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+.user-info h2 {
+  margin: 0;
+  font-size: 16px;
+  margin-top: 0px;
+  font-weight: 400;
+}
+
+.user-content {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 300px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+}
+
+.user-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.user-actions button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.user-actions .action-left {
+  display: flex;
+  gap: 10px;
+}
+
+.user-actions .action-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-actions button img {
+  width: 24px;
+  height: 24px;
+  margin-top: -30px;
+}
+
+/* Импорт изображений пользователей и постов */
+
+.user-profile1,
+.user-profile2,
+.user-profile3,
+.user-profile4,
+.user-profile5 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+.user-profile1 {
+  background-image: url('../assets/user-profile1.jpg');
+}
+
+.user-profile2 {
+  background-image: url('../assets/user-profile2.jpg');
+}
+
+.user-profile3 {
+  background-image: url('../assets/user-profile3.jpg');
+}
+
+.user-profile4 {
+  background-image: url('../assets/user-profile4.jpg');
+}
+
+.user-profile5 {
+  background-image: url('../assets/user-profile5.jpg');
+}
+
+.bluecouch-content {
+  background-image: url('../assets/bluecouch.jpg');
+}
+
+.sampleimage-content {
+  background-image: url('../assets/SampleImage.jpeg');
+}
+
+.sampleimage1-content {
+  background-image: url('../assets/SampleImage1.jpeg');
+}
+
+.sampleimage2-content {
+  background-image: url('../assets/SampleImage2.jpeg');
+}
+
+.sampleimage3-content {
+  background-image: url('../assets/SampleImage3.jpeg');
+}
+
+.footer-navigation {
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  background-color: white;
+  position: fixed; /* Закрепляем футер внизу экрана */
+  bottom: 0;
+  left: 50%; /* Центрируем футер */
+  transform: translateX(-50%); /* Чтобы правильно выровнять по центру */
+  width: 393px; /* Ширина контейнера как у основного */
+  border-top: 2px solid #004d3a;
+  border-left: 2px solid #004d3a;
+  border-right: 2px solid #004d3a;
+  border-bottom: 2px solid #004d3a;
+  box-sizing: border-box;
+  z-index: 999; /* Чтобы футер оставался над контентом */
+}
+
+.footer-menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #004d3a;
+  padding: 8px 0;
+  flex-grow: 1;
+  border-left: 2px solid #004d3a;
+  box-sizing: border-box;
+}
+
+.footer-menu-item:first-child {
+  border-left: none;
+}
+
+.footer-menu-item img {
+  width: 20px;
+  height: auto;
+}
+
+.footer-menu-item span {
+  font-size: 12px;
+  margin-top: 5px;
+}

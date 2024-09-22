@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+/* Модальное окно */
+.moodboard-selection-modal {
+ position: absolute;
+  top: 130px;
+  left: -25px !important; /* Принудительно задаем отступ 20px слева */
+  right: -20px !important; /* Принудительно задаем отступ 20px справа */
+  bottom: auto;
+  width: calc(100% - 45px) !important; /* Принудительно вычисляемая ширина с отступами */
+  width: 445px !important; /* Ограничиваем максимальную ширину до 600px */
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1002; /* Модальное окно выше overlay */ 
+}
+
+/* Основной контейнер */
+#main-container {
+  position: relative;
+  width: 393px; /* Устанавливаем ширину контейнера */
+  height: 852px; /* Устанавливаем высоту контейнера */
+  overflow: hidden; /* Чтобы контент не выходил за пределы контейнера */
+}
+
+/* Overlay, который будет охватывать основной контейнер */
+.moodboard-overlay {
+  position: fixed; /* Перекрывает содержимое страницы */
+  top: 0;
+  left: 50%; /* Центрирование overlay по горизонтали */
+  transform: translateX(-50%); /* Сдвиг для точного центрирования */
+  width: 393px; /* Ширина overlay */
+  height: 852px; /* Высота overlay */
+  background: rgba(243, 232, 205, 0.5); /* Полупрозрачный фон */
+  z-index: 1001; /* Overlay выше футера */
+}
+
+
+/* Контент модального окна */
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 20px !important;
+  width: 100%;
+  max-width: 600px; /* Максимальная ширина модального окна */
+  max-height: 85vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  border: 1px solid #2a6041;
+  z-index: 1001;
+}
+
+.close-button {
+  position: absolute;
+  top: 5px;
+  left: 15px;
+  border: none;
+  background: none;
+  font-size: 70px; /* Уменьшаем размер шрифта */
+  font-weight: 100; /* Делаем текст более тонким */
+  cursor: pointer;
+  color: #2a6041;
+  line-height: 1; /* Уменьшаем межстрочное расстояние, чтобы кнопка выглядела аккуратнее */
+}
+
+
+/* Заголовок модального окна */
+h1 {
+  color: #e6789d !important;
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Поле поиска в модальном окне */
+.search-input {
+  width: 80%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 25px;
+  border: 2px solid #2a6041;
+  font-size: 14px;
+  background-image: url('../assets/search-icon.png');
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+}
+
+/* Список досок настроения */
+.moodboard-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+}
+
+/* Элемент списка досок настроения */
+.moodboard-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 350px;
+}
+
+.moodboard-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-left: 20px;
+}
+
+/* Ховер эффект для элементов списка */
+.moodboard-item:hover {
+  background: #f4f4f4;
+}
+
+/* Кнопка создания новой доски */
+.create-board-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 15px;
+  background: none;
+  border: none;
+  color: #2a6041;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  max-width: 350px;
+  height: 50px;
+  margin-left: 9px;
+}
+
+/* Иконка плюса для создания доски */
+.create-board-button img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 2px solid #2a6041;
+  padding: 3px;
+}
+
+/* Ховер эффект для кнопки создания доски */
+.create-board-button:hover {
+  background: #f4f4f4;
+}
+

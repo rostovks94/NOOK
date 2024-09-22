@@ -1,0 +1,162 @@
+.personal-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 393px;
+    height: 852px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    background-color: #fff;
+    overflow-y: auto;
+}
+
+
+.nook-logo-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.nook-logo-profile {
+    width: 107px;
+    height: 45px;
+}
+
+
+.user-profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
+.user-avatar {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.avatar-upload-input {
+    margin-top: 10px;
+}
+
+
+.user-profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.user-profile-name {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.user-profile-bio {
+    font-size: 14px;
+    text-align: center;
+    color: #666;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+
+.tab-navigation {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    margin-top: 10px;
+    border: 2px solid #2f4f4f;
+    border-radius: 30px;
+    box-sizing: border-box;
+}
+
+.tab-navigation button {
+    background-color: transparent;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #2f4f4f;
+    border-right: 1px solid #2f4f4f;
+    flex-grow: 1;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tab-navigation button:first-child {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.tab-navigation button:last-child {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-right: none;
+}
+
+.tab-navigation button:hover {
+    background-color: #f0c1d1;
+}
+
+.tab-navigation button.active {
+    background-color: #f06292;
+    color: white;
+}
+
+
+.user-content {
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+
+.upload-button {
+    background-color: #f06292;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.upload-button:hover {
+    background-color: #f39ac9;
+}
+
+
+.personal-save-button {
+    background-color: #96fd35;
+    border: 2px solid #2f4f4f;
+    padding: 10px 20px;
+    border-radius: 40px;
+    color: #2f4f4f;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.personal-save-button:hover {
+    background-color: #b0dc32;
+}

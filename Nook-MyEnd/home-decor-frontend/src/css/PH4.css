@@ -1,0 +1,141 @@
+
+.container {
+    width: 393px;
+    height: 852px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+
+  .scrollable-content {
+    flex-grow: 1;
+    overflow-y: auto; 
+    padding: 20px;
+    box-sizing: border-box;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+  }
+  
+
+  .scrollable-content::-webkit-scrollbar {
+    display: none;
+  }
+  
+
+  .nook-logo4 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 107px;
+    height: 45px;
+    margin-top: 20px;
+  }
+  
+ 
+  .profile-header {
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    margin-top: 5px;
+  }
+  
+  .profile-img {
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%; 
+    margin-top: 100px;
+    object-fit: cover; 
+    align-self: flex-start; 
+  }
+  
+  .profile-details h2 {
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 400;
+    text-align: left; 
+
+  }
+  .profile-details p {
+    text-align: left; 
+  }
+
+  .follow-btn {
+    background-color: #c2f33a; 
+    color: #2f4f4f; 
+    border: 2px solid #2f4f4f; 
+    border-radius: 20px; 
+    padding: 10px 25px;
+    cursor: pointer;
+    font-size: 16px; 
+    font-weight: 400; 
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+    margin: 5px 0px; 
+    display: block;
+    
+  }
+
+  .tabs {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+  }
+  
+  .tab {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .tab.active {
+    border-bottom: 2px solid #ff99cc;
+  }
+  
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .content-grid img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+
+  .bottom-navigation {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bottom-navigation a, .bottom-navigation button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #004d3a;
+  }
+  
+  .bottom-navigation img {
+    width: 24px;
+    height: auto;
+  }
+  
+  .bottom-navigation span {
+    font-size: 12px;
+    margin-top: 5px;
+  }
