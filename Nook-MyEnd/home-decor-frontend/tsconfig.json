@@ -13,10 +13,6 @@
       "@/*": ["src/*"]
     }
   },
-<<<<<<< HEAD
   "include": ["src/**/*", "firebaseServices.ts", "src/firebaseConfig.ts"],
-=======
-  "include": ["src/**/*"],
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
   "exclude": ["node_modules", "dist"]
 }
