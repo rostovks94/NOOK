@@ -8,11 +8,7 @@ html, body {
 
 body {
     font-family: 'Nunito', sans-serif;
-<<<<<<< HEAD
     min-height: 100vh; 
-=======
-    min-height: 100vh;
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
     display: flex;
     justify-content: center;
     align-items: center;
@@ -115,10 +111,7 @@ body {
 .login-button {
     background-color: #b1f138;
     border: 2px solid #2f4f4f;
-<<<<<<< HEAD
     margin-top: 20px;
-=======
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
     color: #2f4f4f;
 }
 

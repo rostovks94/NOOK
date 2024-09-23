@@ -2,31 +2,18 @@
 
 /* Модальное окно */
 .moodboard-selection-modal {
-<<<<<<< HEAD
- position: absolute;
-  top: 130px;
-  left: -25px !important; /* Принудительно задаем отступ 20px слева */
-  right: -20px !important; /* Принудительно задаем отступ 20px справа */
-  bottom: auto;
-  width: calc(100% - 45px) !important; /* Принудительно вычисляемая ширина с отступами */
-=======
   position: absolute;
   top: 130px;
   left: -25px !important; /* Принудительно задаем отступ 20px слева */
   right: -15px !important; /* Принудительно задаем отступ 20px справа */
   bottom: auto;
   width: calc(100% - 40px) !important; /* Принудительно вычисляемая ширина с отступами */
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
-  width: 445px !important; /* Ограничиваем максимальную ширину до 600px */
+  width: 445px !important; /* Ограничиваем максимальную ширину */
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-<<<<<<< HEAD
-  z-index: 1002; /* Модальное окно выше overlay */ 
-=======
   z-index: 1002; /* Модальное окно выше overlay */
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
 }
 
 /* Основной контейнер */
@@ -37,7 +24,6 @@
   overflow: hidden; /* Чтобы контент не выходил за пределы контейнера */
 }
 
-<<<<<<< HEAD
 /* Overlay, который будет охватывать основной контейнер */
 .moodboard-overlay {
   position: fixed; /* Перекрывает содержимое страницы */
@@ -50,20 +36,6 @@
   z-index: 1001; /* Overlay выше футера */
 }
 
-
-=======
-/* Overlay, который будет охватывать весь основной контейнер и перекрывать footer */
-.moodboard-overlay {
-  position: fixed; /* Перекрывает весь экран, включая футер */
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(243, 232, 205, 0.5); /* Полупрозрачный фон для overlay */
-  z-index: 1001; /* Overlay выше футера, но ниже модального окна */
-}
-
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
 /* Контент модального окна */
 .modal-content {
   background: white;
@@ -81,33 +53,19 @@
   z-index: 1001;
 }
 
-<<<<<<< HEAD
-=======
 /* Кнопка закрытия модального окна */
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
 .close-button {
   position: absolute;
   top: 5px;
   left: 15px;
   border: none;
   background: none;
-<<<<<<< HEAD
-  font-size: 70px; /* Уменьшаем размер шрифта */
-  font-weight: 100; /* Делаем текст более тонким */
-  cursor: pointer;
-  color: #2a6041;
-  line-height: 1; /* Уменьшаем межстрочное расстояние, чтобы кнопка выглядела аккуратнее */
-}
-
-
-=======
   font-size: 50px;
   font-weight: 100;
   cursor: pointer;
   color: #000000;
 }
 
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
 /* Заголовок модального окна */
 h1 {
   color: #e6789d !important;
@@ -202,4 +160,3 @@ h1 {
 .create-board-button:hover {
   background: #f4f4f4;
 }
-

@@ -1,47 +1,33 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
-=======
-import React from 'react';
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
 import '../css/MoodBoardSelection.css';
-
 import farmhouseKitchenImage from '../assets/FarmhouseKitchen.jpg';
 import groovyLivingRoomImage from '../assets/GroovyLivingRoom.jpg';
 import eclecticModernImage from '../assets/ElectricModern.jpg';
 import plusIcon from '../assets/plus.png';
-<<<<<<< HEAD
-import CreateMoodBoard from './CreateMoodBoard'; // Импортируем модальное окно CreateMoodBoard
-=======
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
+import CreateMoodBoard from './CreateMoodBoard';
 
 interface MoodBoardSelectionProps {
-  onClose: () => void;  
+  onClose: () => void;
 }
 
 const MoodBoardSelection: React.FC<MoodBoardSelectionProps> = ({ onClose }) => {
-<<<<<<< HEAD
   const [showCreateMoodBoard, setShowCreateMoodBoard] = useState(false);
 
   const handleCreateBoardClick = () => {
-    setShowCreateMoodBoard(true);  // Показываем окно CreateMoodBoard
+    setShowCreateMoodBoard(true);
   };
 
   if (showCreateMoodBoard) {
-    return <CreateMoodBoard onClose={onClose} />;  // Если нужно показать окно создания доски настроений, рендерим его
+    return <CreateMoodBoard onClose={onClose} />;
   }
 
-=======
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
   return (
     <div className="moodboard-selection-modal">
       <div className="moodboard-overlay" onClick={onClose}></div>
       <div className="modal-content">
-        <button className="close-button" onClick={onClose}>×</button> 
-        
+        <button className="close-button" onClick={onClose}>×</button>
         <h1>Save to Board</h1>
-        
-        <input type="text" placeholder="Search" className="search-input" /> 
-        
+        <input type="text" placeholder="Search" className="search-input" />
         <div className="moodboard-list">
           <div className="moodboard-item">
             <img src={farmhouseKitchenImage} alt="Farmhouse Kitchen" />
@@ -55,15 +41,7 @@ const MoodBoardSelection: React.FC<MoodBoardSelectionProps> = ({ onClose }) => {
             <img src={eclecticModernImage} alt="Eclectic Modern" />
             Eclectic Modern
           </div>
-
-          <button
-            className="create-board-button"
-<<<<<<< HEAD
-            onClick={handleCreateBoardClick}  // Обрабатываем нажатие на кнопку создания доски
-=======
-            onClick={() => window.location.href = '/create-moodboard'}  
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
-          >
+          <button className="create-board-button" onClick={handleCreateBoardClick}>
             <img src={plusIcon} alt="Create Mood Board Icon" />
             Create Mood Board
           </button>

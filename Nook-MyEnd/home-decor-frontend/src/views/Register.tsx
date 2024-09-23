@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
-import logoImage from '../assets/NookLogo.png'; // Импортируем изображение логотипа
-=======
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
 import { useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth'; 
-import { auth } from '../firebaseConfig'; 
+import { fetchSignInMethodsForEmail } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 import '../css/Register.css';
-<<<<<<< HEAD
-
-=======
-import logoImage from '../assets/NookLogo.png'; 
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
+import logoImage from '../assets/NookLogo.png';
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -19,31 +11,35 @@ const Register: React.FC = () => {
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [error, setError] = useState('');
 
+  // Обработчик изменения email
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = event.target.value;
     setEmail(emailValue);
 
+    // Валидация email с помощью регулярного выражения
     const emailValidationRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setIsValidEmail(emailValidationRegex.test(emailValue));
   };
 
+  // Обработчик отправки формы
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (isValidEmail) {
       try {
-        // Use createUserWithEmailAndPassword for registration with email
-        const userCredential = await createUserWithEmailAndPassword(auth, email, ''); // No password provided
-        const token = await userCredential.user.getIdToken();
-        localStorage.setItem('authToken', token);
-        navigate('/complete-signup');
-      } catch (error: any) {
-        // Handle different registration errors
-        if (error.code === 'auth/email-already-in-use') {
-          setError('This email is already registered. Please use a different email or sign in to your account.');
+        // Проверка, существует ли email в базе
+        const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+
+        if (signInMethods.length === 0) {
+          // Если email не зарегистрирован, перенаправляем на страницу CompleteSignUp
+          navigate('/complete-signup', { state: { email } });
         } else {
-          setError('Registration error. Please try again.');
+          // Если email уже существует, показываем ошибку
+          setError('This email is already registered. Please use a different email or sign in to your account.');
         }
+      } catch (error: any) {
+        // Обработка ошибок при проверке email
+        setError('Registration error. Please try again.');
       }
     } else {
       setError('Please enter a valid email.');
@@ -68,8 +64,8 @@ const Register: React.FC = () => {
           </div>
           {error && <p className="error-message">{error}</p>}
           <button type="submit" className="register-create-account-button">Sign Up</button>
-          <div className="register-divider"><span>OR</span></div> {/* Разделитель OR */}
-          <button type="button" className="register-login-button" onClick={() => navigate('/login')}>Sign In</button>
+          <div className="register-divider"><span>OR</span></div>
+          <button type="button" className="register-login-button" onClick={() => navigate('/login')}>Login</button>
         </form>
       </div>
     </div>

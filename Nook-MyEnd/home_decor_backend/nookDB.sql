@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 -- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
 -- Host: localhost    Database: nookdb
@@ -16,20 +15,19 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
 -- Table structure for table `auth_group`
---
-
 DROP TABLE IF EXISTS `auth_group`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `auth_group` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- (дальше идут остальные таблицы и данные)
+
+/*!40101 SET character_set_client = 'utf8mb4' */;
+
 
 --
 -- Dumping data for table `auth_group`

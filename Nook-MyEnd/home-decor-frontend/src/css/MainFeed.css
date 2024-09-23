@@ -4,10 +4,6 @@ html, body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
-<<<<<<< HEAD
-=======
-  overflow-y: hidden;
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
   box-sizing: border-box;
   background-color: white;
   font-family: 'Arial', sans-serif;
@@ -16,17 +12,10 @@ html, body {
 #root {
   display: flex;
   justify-content: center;
-<<<<<<< HEAD
   align-items: flex-start; /* Изменено с center на flex-start */
   height: 100%; 
   width: 100%;
   overflow-y: auto; /* Разрешаем вертикальную прокрутку */
-=======
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  overflow-y: auto;
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
   overflow-x: hidden;
   scrollbar-width: none;
 }
@@ -36,25 +25,14 @@ html, body {
 }
 
 .main-feed {
-<<<<<<< HEAD
   width: 393px;
-  /* Убираем фиксированную высоту */
-  /* height: 852px; */ 
   min-height: 100vh; /* Минимальная высота 100% видимого экрана */
-=======
-  width: 393px; /* Ширина общего контейнера */
-  height: 852px; /* Высота общего контейнера */
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.8);
-<<<<<<< HEAD
   padding: 0 20px;
-=======
-  padding: 0 20px; /* Отступы 20px слева и справа */
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
@@ -65,10 +43,6 @@ html, body {
   display: none;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
 .logo-avatar-container {
   display: flex;
   justify-content: center;
@@ -325,7 +299,6 @@ html, body {
   justify-content: space-around;
   padding: 0;
   background-color: white;
-<<<<<<< HEAD
   position: fixed; /* Закрепляем футер внизу экрана */
   bottom: 0;
   left: 50%; /* Центрируем футер */
@@ -337,15 +310,6 @@ html, body {
   border-bottom: 2px solid #004d3a;
   box-sizing: border-box;
   z-index: 999; /* Чтобы футер оставался над контентом */
-=======
-  position: sticky; /* Заменяем fixed на sticky */
-  bottom: 0;
-  margin-left: 0px; /* Возвращаем футер на место */
-  width: 110%; /* Ширина контейнера */
-  border: 2px solid #004d3a;
-  box-sizing: border-box;
-  z-index: 999; /* Чтобы он был ниже overlay */
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
 }
 
 .footer-menu-item {
@@ -354,18 +318,10 @@ html, body {
   align-items: center;
   text-decoration: none;
   color: #004d3a;
-<<<<<<< HEAD
   padding: 8px 0;
   flex-grow: 1;
   border-left: 2px solid #004d3a;
   box-sizing: border-box;
-=======
-  padding: 10px 0;
-  flex-grow: 1;
-  border-left: 2px solid #004d3a;
-  box-sizing: border-box;
-  
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
 }
 
 .footer-menu-item:first-child {
@@ -380,9 +336,4 @@ html, body {
 .footer-menu-item span {
   font-size: 12px;
   margin-top: 5px;
-<<<<<<< HEAD
 }
-=======
-  
-}
->>>>>>> 8025780507bbb4210761c023cac445f958e4cb0c
