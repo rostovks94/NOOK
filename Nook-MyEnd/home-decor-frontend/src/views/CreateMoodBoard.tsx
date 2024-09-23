@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import bluecouch from '../assets/bluecouch.jpg'; // Импорт изображения
+import bluecouch from '../assets/bluecouch.jpg'; // Импортируем изображение напрямую
 import '../css/CreateMoodBoard.css';
 
 interface CreateMoodBoardProps {
@@ -82,7 +82,7 @@ const CreateMoodBoard: React.FC<CreateMoodBoardProps> = ({ onClose }) => {
 
         {/* Кнопка для тестирования перехода на страницу подтверждения */}
         <button onClick={() => navigate('/home-decor-app/save-confirmation')}>
-         !
+          !
         </button>
       </div>
     </div>

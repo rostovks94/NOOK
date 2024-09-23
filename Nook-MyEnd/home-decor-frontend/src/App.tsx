@@ -5,7 +5,7 @@ import ContentDetail from './views/ContentDetail';
 import MoodBoardSelection from './views/MoodBoardSelection'; 
 import CreateMoodBoard from './views/CreateMoodBoard'; 
 import SaveConfirmation from './views/SaveConfirmation'; 
-import UserProfile from './views/PH4'; // Проверь правильность имени компонента
+import PH4 from './views/PH4'; // Убедитесь, что компонент правильно импортирован
 import Register from './views/Register';
 import Login from './views/Login'; 
 import CompleteSignUp from './views/CompleteSignUp';
@@ -15,7 +15,7 @@ import SaveModal from './components/SaveModal';
 // Функция для проверки авторизации пользователя
 const isAuthenticated = () => {
   const token = localStorage.getItem('authToken');
-  return !!token; // Возвращает true, если токен есть
+  return !!token; // Возвращает true, если токен существует
 };
 
 // Компонент для защиты приватных маршрутов
@@ -44,7 +44,8 @@ const App: React.FC = () => {
         <Route path="/personalprofile" element={<PrivateRoute><PersonalProfile /></PrivateRoute>} />
         <Route path="/save-confirmation" element={<SaveConfirmation />} />
 
-        <Route path="/user-profile/Yelena_Jones" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
+        {/* Профиль пользователя */}
+        <Route path="/user-profile/Yelena_Jones" element={<PrivateRoute><PH4 /></PrivateRoute>} />
 
         {/* Маршрут по умолчанию на случай, если путь не найден */}
         <Route path="*" element={<Navigate to="/register" replace />} />

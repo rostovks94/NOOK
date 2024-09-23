@@ -1,48 +1,81 @@
-.personal-profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+.container {
     width: 393px;
     height: 852px;
-    padding: 10px;
-    box-sizing: border-box;
     margin: 0 auto;
-    background-color: #fff;
-    overflow-y: auto;
-}
-
-.nook-logo-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.nook-logo-profile {
-    width: 107px;
-    height: 45px;
-}
-
-.user-profile-header {
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  .scrollable-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .scrollable-content::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .header-container {
+    position: relative;
+    display: flex;
     align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.user-avatar {
+    justify-content: center;
+  }
+  
+  .nook-logo-profile {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 107px;
+    height: 45px;
+    margin-top: 30px;
+  }
+  
+  .icon-container {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    gap: 15px;
+    margin-top: 100px;
+  }
+  
+  .icon {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .profile-page {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: -50px;
+  }
+  
+  .profile-img {
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
+    margin-top: 100px;
     object-fit: cover;
-    margin-bottom: 10px;
-}
-
-.empty-avatar {
-    width: 80px;
-    height: 80px;
+  }
+  
+  .empty-avatar {
+    width: 100px;
+    height: 100px;
     background-color: #e0e0e0;
     border-radius: 50%;
     display: flex;
@@ -51,117 +84,96 @@
     color: #757575;
     font-size: 14px;
     margin-bottom: 10px;
-}
-
-.avatar-upload-input {
-    margin-top: 10px;
-}
-
-.user-profile-info {
+  }
+  
+  .upload-tabs {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+    background-color: #fff;
+    border-radius: 50px;
+    padding: 5px 0;
+  }
+  
+  .tab {
+    flex: 1;
+    padding: 15px 15px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #f3f3f3;
+    color: #004d3a;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .tab.active {
+    background-color: #ff99cc;
+    color: #004d3a;
+  }
+  
+  .tab:hover {
+    background-color: #ffb3d9;
+  }
+  
+  .profile-grid {
+    display: flex;
+    margin-bottom: 0;
+  }
+  
+  .big-placeholder {
+    width: 50%;
+    height: 250px;
+    background-color: #e0e0e0;
+  }
+  
+  .small-placeholder-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+  
+  .small-placeholder {
+    width: 100%;
+    height: 125px;
+    background-color: #e0e0e0;
+  }
+  
+  .bottom-navigation {
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 393px;
+    border-top: 2px solid #004d3a;
+    border-right: 2px solid #004d3a;
+    border-bottom: 2px solid #004d3a;
+    box-sizing: border-box;
+    z-index: 999;
+  }
+  
+  .bottom-navigation a, .bottom-navigation button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    padding: 0 10px;
-    box-sizing: border-box;
-    margin-bottom: 15px;
-}
-
-.user-profile-name {
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 5px;
-}
-
-.user-profile-bio {
-    font-size: 14px;
-    text-align: center;
-    color: #666;
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-.tab-navigation {
-    display: flex;
-    justify-content: space-between;
-    width: calc(100% - 40px);
-    margin: 0 auto;
-    margin-top: 10px;
-    border: 2px solid #2f4f4f;
-    border-radius: 30px;
-    box-sizing: border-box;
-}
-
-.tab-navigation button {
-    background-color: transparent;
-    border: none;
-    padding: 12px 30px;
-    font-size: 16px;
-    cursor: pointer;
-    color: #2f4f4f;
-    border-right: 1px solid #2f4f4f;
+    text-decoration: none;
+    color: #004d3a;
+    padding: 8px 0;
     flex-grow: 1;
-    text-align: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.tab-navigation button:first-child {
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-}
-
-.tab-navigation button:last-child {
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    border-right: none;
-}
-
-.tab-navigation button:hover {
-    background-color: #f0c1d1;
-}
-
-.tab-navigation button.active {
-    background-color: #f06292;
-    color: white;
-}
-
-.user-content {
-    width: 100%;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    text-align: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    border-left: 2px solid #004d3a;
     box-sizing: border-box;
-}
-
-.upload-button {
-    background-color: #f06292;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.upload-button:hover {
-    background-color: #f39ac9;
-}
-
-.personal-save-button {
-    background-color: #96fd35;
-    border: 2px solid #2f4f4f;
-    padding: 10px 20px;
-    border-radius: 40px;
-    color: #2f4f4f;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-.personal-save-button:hover {
-    background-color: #b0dc32;
-}
+  }
+  
+  .bottom-navigation img {
+    width: 24px;
+    height: auto;
+  }
+  
+  .bottom-navigation span {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  

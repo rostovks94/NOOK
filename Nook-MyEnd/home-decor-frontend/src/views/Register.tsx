@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchSignInMethodsForEmail } from 'firebase/auth';
-import { auth } from '../firebaseConfig';
 import '../css/Register.css';
 import logoImage from '../assets/NookLogo.png';
 
@@ -22,25 +20,12 @@ const Register: React.FC = () => {
   };
 
   // Обработчик отправки формы
-  const handleFormSubmit = async (event: React.FormEvent) => {
+  const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
     if (isValidEmail) {
-      try {
-        // Проверка, существует ли email в базе
-        const signInMethods = await fetchSignInMethodsForEmail(auth, email);
-
-        if (signInMethods.length === 0) {
-          // Если email не зарегистрирован, перенаправляем на страницу CompleteSignUp
-          navigate('/complete-signup', { state: { email } });
-        } else {
-          // Если email уже существует, показываем ошибку
-          setError('This email is already registered. Please use a different email or sign in to your account.');
-        }
-      } catch (error: any) {
-        // Обработка ошибок при проверке email
-        setError('Registration error. Please try again.');
-      }
+      // Переход на страницу CompleteSignUp
+      navigate('/complete-signup', { state: { email } });
     } else {
       setError('Please enter a valid email.');
     }
@@ -65,7 +50,7 @@ const Register: React.FC = () => {
           {error && <p className="error-message">{error}</p>}
           <button type="submit" className="register-create-account-button">Sign Up</button>
           <div className="register-divider"><span>OR</span></div>
-          <button type="button" className="register-login-button" onClick={() => navigate('/login')}>Login</button>
+          <button type="button" className="register-login-button" onClick={() => navigate('/login')}>Sign In</button>
         </form>
       </div>
     </div>
