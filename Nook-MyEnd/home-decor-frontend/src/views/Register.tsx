@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, fetchSignInMethodsForEmail } from 'firebase/auth'; // Импортируем Firebase Authentication
 import '../css/Register.css';
 import logoImage from '../assets/NookLogo.png';
 
@@ -8,6 +9,7 @@ const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [error, setError] = useState('');
+  const auth = getAuth();
 
   // Обработчик изменения email
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,12 +22,25 @@ const Register: React.FC = () => {
   };
 
   // Обработчик отправки формы
-  const handleFormSubmit = (event: React.FormEvent) => {
+  const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (isValidEmail) {
-      // Переход на страницу CompleteSignUp
-      navigate('/complete-signup', { state: { email } });
+      try {
+        // Проверка существования учетной записи с таким email
+        const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+        
+        if (signInMethods.length > 0) {
+          // Если уже существует метод входа для этого email, выводим ошибку
+          setError('An account with this email already exists. Please log in.');
+        } else {
+          // Если нет учетной записи, переходим на страницу CompleteSignUp
+          navigate('/complete-signup', { state: { email } });
+        }
+      } catch (error) {
+        console.error('Error checking email:', error);
+        setError('An error occurred. Please try again.');
+      }
     } else {
       setError('Please enter a valid email.');
     }
