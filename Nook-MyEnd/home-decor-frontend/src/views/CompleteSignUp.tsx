@@ -14,6 +14,7 @@ const CompleteSignUp: React.FC = () => {
 
     if (success) {
       localStorage.setItem('authToken', 'yourTokenValue'); 
+      localStorage.setItem('username', username); // Сохранение имени пользователя
       
       const savedToken = localStorage.getItem('authToken');
       if (savedToken) {
@@ -24,7 +25,6 @@ const CompleteSignUp: React.FC = () => {
         alert('Something went wrong. Please try again.');
       }
     } else {
-
       console.error('Sign-up process failed');
       alert('Please make sure all fields are filled and passwords match.');
     }

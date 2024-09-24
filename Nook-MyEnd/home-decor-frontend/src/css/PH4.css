@@ -142,30 +142,31 @@
 
 .moodboard-grid {
   display: flex;
-  margin-bottom: 0;
+  gap: 0; /* Убираем пробелы между изображениями */
 }
 
 .big-image {
-  width: 50%;
-  height: 250px;
+  width: 50%; /* Большое изображение занимает половину ширины */
+  height: 250px; /* Высота для всех изображений */
   object-fit: cover;
-  margin-right: 0;
 }
 
 .small-images {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0;
+  grid-template-columns: repeat(2, 1fr); /* Два изображения по ширине */
+  grid-template-rows: repeat(2, 1fr); /* Два изображения по высоте */
+  width: 50%; /* Маленькие изображения занимают вторую половину ширины */
+  height: 250px; /* Высота такая же, как у большого изображения */
+  gap: 0; /* Убираем пробелы между изображениями */
 }
 
 .small-image {
   width: 100%;
-  height: 125px;
+  height: 125px; /* Каждое изображение заполняет свою ячейку по высоте */
   object-fit: cover;
-  margin: 0;
-  padding: 0;
   border: none;
 }
+
 
 .bottom-navigation {
   display: flex;

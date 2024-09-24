@@ -1,179 +1,305 @@
-.container {
-    width: 393px;
-    height: 852px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-  
-  .scrollable-content {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: 20px;
-    box-sizing: border-box;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  
-  .scrollable-content::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .header-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .nook-logo-profile {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 107px;
-    height: 45px;
-    margin-top: 30px;
-  }
-  
-  .icon-container {
-    position: absolute;
-    right: 10px;
-    display: flex;
-    gap: 15px;
-    margin-top: 100px;
-  }
-  
-  .icon {
-    width: 25px;
-    height: 25px;
-  }
-  
-  .profile-page {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: space-between;
-    margin-top: 40px;
-  }
-  
-  .profile-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: -50px;
-  }
-  
-  .profile-img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-top: 100px;
-    object-fit: cover;
-  }
-  
-  .empty-avatar {
-    width: 100px;
-    height: 100px;
-    background-color: #e0e0e0;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #757575;
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  
-  .upload-tabs {
-    display: flex;
-    justify-content: space-between;
-    margin: 30px 0;
-    background-color: #fff;
-    border-radius: 50px;
-    padding: 5px 0;
-  }
-  
-  .tab {
-    flex: 1;
-    padding: 15px 15px;
-    cursor: pointer;
-    text-align: center;
-    background-color: #f3f3f3;
-    color: #004d3a;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .tab.active {
-    background-color: #ff99cc;
-    color: #004d3a;
-  }
-  
-  .tab:hover {
-    background-color: #ffb3d9;
-  }
-  
-  .profile-grid {
-    display: flex;
-    margin-bottom: 0;
-  }
-  
-  .big-placeholder {
-    width: 50%;
-    height: 250px;
-    background-color: #e0e0e0;
-  }
-  
-  .small-placeholder-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0;
-  }
-  
-  .small-placeholder {
-    width: 100%;
-    height: 125px;
-    background-color: #e0e0e0;
-  }
-  
-  .bottom-navigation {
-    display: flex;
-    justify-content: space-around;
-    padding: 0;
-    background-color: white;
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 393px;
-    border-top: 2px solid #004d3a;
-    border-right: 2px solid #004d3a;
-    border-bottom: 2px solid #004d3a;
-    box-sizing: border-box;
-    z-index: 999;
-  }
-  
-  .bottom-navigation a, .bottom-navigation button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: #004d3a;
-    padding: 8px 0;
-    flex-grow: 1;
-    border-left: 2px solid #004d3a;
-    box-sizing: border-box;
-  }
-  
-  .bottom-navigation img {
-    width: 24px;
-    height: auto;
-  }
-  
-  .bottom-navigation span {
-    font-size: 12px;
-    margin-top: 5px;
-  }
-  
+.profile-container {
+  width: 393px;
+  height: 852px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.scrollable-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollable-content::-webkit-scrollbar {
+  display: none;
+}
+
+.profile-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 107px;
+  height: 45px;
+  margin-top: 30px;
+}
+
+.user-info-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.user-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  object-fit: cover;
+  align-self: center;
+  position: relative;
+}
+
+.avatar-placeholder {
+  width: 100px;
+  height: 100px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #757575;
+  font-size: 14px;
+  position: relative;
+}
+
+.avatar-upload-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.bio-container {
+  font-size: 16px;
+  margin-top: 10px;
+  font-weight: 400;
+  text-align: left;
+  width: 100%;
+}
+
+.bio-text {
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.user-name {
+  font-size: 18px;
+  font-weight: 100;
+  color: #333;
+  margin-top: 25px;
+}
+
+.edit-bio-button {
+  background-color: #91ff30;
+  color: #2f4f4f;
+  border: 1px solid #2f4f4f;
+  border-radius: 20px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 400;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 0;
+}
+
+.bio-textarea {
+  width: 100%;
+  height: 100px;
+  font-size: 14px;
+  font-weight: 100;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.save-bio-button {
+  margin-top: 10px;
+  background-color: #004d3a;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profile-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  background-color: #fff;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.profile-tab {
+  flex: 1;
+  padding: 10px 15px;
+  cursor: pointer;
+  text-align: center;
+  background-color: #f3f3f3;
+  color: #004d3a;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.profile-tab.active {
+  background-color: #ff99cc;
+  color: #004d3a;
+}
+
+.profile-tab:hover {
+  background-color: #ffb3d9;
+}
+
+.profile-tab:first-child {
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
+.profile-tab:last-child {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+
+.moodboard-grid-custom {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Две колонки */
+  gap: 0; /* Убираем пробелы между элементами */
+  height: 258px; /* Общая высота для всех изображений */
+}
+
+.big-image-custom {
+  grid-column: 1 / 2; /* Большое изображение занимает первую колонку */
+  grid-row: 1 / 3; /* Большое изображение занимает две строки */
+  width: 100%; /* Занимает всю ширину колонки */
+  height: 100%; /* Заполняет высоту */
+  object-fit: cover; /* Обеспечиваем правильное соотношение сторон */
+}
+
+.small-images-custom {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Два изображения по ширине */
+  grid-template-rows: repeat(2, 1fr); /* Два изображения по высоте */
+  gap: 0; /* Убираем пробелы */
+  width: 100%;
+  height: 100%;
+}
+
+.small-image-custom {
+  width: 100%;
+  height: 100%; /* Занимает всю высоту своей ячейки */
+  object-fit: cover;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+/* Разметка постов как на MainFeed */
+.user-card-custom {
+  width: 300%;
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+ 
+}
+
+.user-info-custom {
+  display: flex;
+  align-items: center;
+  font-weight: 100;
+  gap: 10px;
+}
+
+.profile-picture-custom {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+.user-content-grid-custom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Три изображения по ширине */
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.post-image-custom {
+  width: 100%;
+  height: 250px; /* Фиксированная высота для изображения поста */
+  object-fit: cover;
+}
+
+.profile-navigation {
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 393px;
+  border-top: 2px solid #004d3a;
+  border-right: 2px solid #004d3a;
+  border-bottom: 2px solid #004d3a;
+  box-sizing: border-box;
+  z-index: 999;
+}
+
+.profile-navigation a, 
+.profile-navigation label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #004d3a;
+  padding: 8px 0;
+  flex-grow: 1;
+  border-left: 2px solid #004d3a;
+  box-sizing: border-box;
+}
+
+.profile-navigation img {
+  width: 24px;
+  height: auto;
+}
+
+.profile-navigation label {
+  cursor: pointer;
+}
+
+.profile-navigation input[type="file"] {
+  display: none;
+}
+
+.profile-navigation span {
+  font-size: 12px;
+  margin-top: 5px;
+}
