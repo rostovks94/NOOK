@@ -30,12 +30,13 @@ const CompleteSignUp: React.FC = () => {
               });
             })
             .catch((error) => {
-              console.error('Error updating profile:', error);
+              console.error('Error updating profile:', error.code, error.message);
+              alert('Error updating profile: ' + error.message);
             });
         })
         .catch((error) => {
-          console.error('Error during sign-up:', error);
-          alert('Failed to create account. Please try again.');
+          console.error('Error during sign-up:', error.code, error.message);
+          alert('Failed to create account. Error: ' + error.message);
         });
     } else {
       alert('Please make sure all fields are filled and passwords match.');
