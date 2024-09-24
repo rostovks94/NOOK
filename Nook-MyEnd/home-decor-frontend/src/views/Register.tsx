@@ -65,7 +65,7 @@ const Register: React.FC = () => {
           {error && <p className="error-message">{error}</p>}
           <button type="submit" className="register-create-account-button">Sign Up</button>
           <div className="register-divider"><span>OR</span></div>
-          <button type="button" className="register-login-button" onClick={() => navigate('/login')}>Sign In</button>
+          <button type="button" className="register-login-button" onClick={() => navigate('/login')}>Login</button>
         </form>
       </div>
     </div>
