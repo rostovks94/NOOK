@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import bluecouch from '../assets/bluecouch.jpg'; // Импортируем изображение напрямую
+import bluecouch from '../assets/bluecouch.jpg'; // Импортируем изображение
 import '../css/CreateMoodBoard.css';
 
 interface CreateMoodBoardProps {
@@ -16,7 +16,7 @@ const CreateMoodBoard: React.FC<CreateMoodBoardProps> = ({ onClose }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Переход на страницу подтверждения после отправки формы
+    // Логика для создания доски настроения
     navigate('/home-decor-app/save-confirmation');
   };
 
@@ -50,7 +50,7 @@ const CreateMoodBoard: React.FC<CreateMoodBoardProps> = ({ onClose }) => {
             <option>Office</option>
           </select>
 
-          <label>
+          <label className="toggle-switch">
             <input
               type="checkbox"
               className="checkbox"
@@ -79,11 +79,6 @@ const CreateMoodBoard: React.FC<CreateMoodBoardProps> = ({ onClose }) => {
             </button>
           </div>
         </form>
-
-        {/* Кнопка для тестирования перехода на страницу подтверждения */}
-        <button onClick={() => navigate('/home-decor-app/save-confirmation')}>
-          !
-        </button>
       </div>
     </div>
   );

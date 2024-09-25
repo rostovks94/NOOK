@@ -122,14 +122,15 @@
 }
 
 .bio-textarea {
-  width: 100%;
-  height: 100px;
+  width: 320px;
+  height: 150px;
   font-size: 14px;
   font-weight: 100;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-top: 10px;
+  resize: none;
 }
 
 .save-bio-button {
@@ -181,57 +182,56 @@
   border-bottom-right-radius: 50px;
 }
 
-
 .moodboard-grid-custom {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Две колонки */
-  gap: 0; /* Убираем пробелы между элементами */
-  height: 258px; /* Общая высота для всех изображений */
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  height: 258px;
 }
 
 .big-image-custom {
-  grid-column: 1 / 2; /* Большое изображение занимает первую колонку */
-  grid-row: 1 / 3; /* Большое изображение занимает две строки */
-  width: 100%; /* Занимает всю ширину колонки */
-  height: 100%; /* Заполняет высоту */
-  object-fit: cover; /* Обеспечиваем правильное соотношение сторон */
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .small-images-custom {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Два изображения по ширине */
-  grid-template-rows: repeat(2, 1fr); /* Два изображения по высоте */
-  gap: 0; /* Убираем пробелы */
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0;
   width: 100%;
   height: 100%;
 }
 
 .small-image-custom {
   width: 100%;
-  height: 100%; /* Занимает всю высоту своей ячейки */
+  height: 100%;
   object-fit: cover;
   border: none;
   margin: 0;
   padding: 0;
 }
 
-
-
-
-/* Разметка постов как на MainFeed */
 .user-card-custom {
-  width: 300%;
-  font-weight: 300;
+  width: 100%;
+  max-width: none;
+  font-weight: 100 !important;
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
- 
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .user-info-custom {
   display: flex;
   align-items: center;
-  font-weight: 100;
+  font-weight: 100 !important;
+  margin-top: 5px;
+  margin-bottom: -15px;
   gap: 10px;
 }
 
@@ -245,14 +245,14 @@
 
 .user-content-grid-custom {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Три изображения по ширине */
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   margin-top: 20px;
 }
 
 .post-image-custom {
-  width: 100%;
-  height: 250px; /* Фиксированная высота для изображения поста */
+  width: 350px;
+  height: 300px;
   object-fit: cover;
 }
 
@@ -273,7 +273,7 @@
   z-index: 999;
 }
 
-.profile-navigation a, 
+.profile-navigation a,
 .profile-navigation label {
   display: flex;
   flex-direction: column;
@@ -302,4 +302,78 @@
 .profile-navigation span {
   font-size: 12px;
   margin-top: 5px;
+}
+
+.settings-popup {
+  position: absolute;
+  bottom: 50px;
+  right: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  width: 150px;
+}
+
+.settings-option {
+  padding: 15px;
+  cursor: pointer;
+  text-align: center;
+  color: #004d3a;
+  font-weight: 500;
+  text-decoration: none;
+  display: block;
+}
+
+.settings-option:hover {
+  background-color: #f1f1f1;
+  color: #004d3a;
+}
+
+.settings-option:last-child {
+  border-top: 1px solid #ddd;
+}
+
+/* Стили для модального окна */
+/* Стили для модального окна, ограниченного основным контейнером */
+.modal-overlay {
+  position: absolute; /* Абсолютное позиционирование внутри контейнера */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  /* background-color: rgba(251, 243, 170, 0.5); Полупрозрачный фон убран */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Модальное окно отображается внизу */
+  z-index: 999; /* Поверх всего контента */
+}
+
+.modal {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  width: 90%; /* Ширина окна в пределах 393px контейнера */
+  max-width: 300px; /* Максимальная ширина модального окна */
+  margin-bottom: 250px;
+  margin-right: 10px; /* Отступ от нижней границы контейнера */
+}
+
+.moodboard-name-input {
+  width: 100%;
+  padding: 0px;
+  margin-top: 0px;
+  font-size: 16px;
+}
+
+.modal-submit-button {
+  margin-top: 20px;
+  background-color: #004d3a;
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
 }

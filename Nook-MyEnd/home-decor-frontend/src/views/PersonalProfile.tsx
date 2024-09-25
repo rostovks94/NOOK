@@ -27,6 +27,10 @@ const PersonalProfile: React.FC = () => {
   const [bulletinFiles, setBulletinFiles] = useState<File[]>([]);
   const [uploadType, setUploadType] = useState<'post' | 'moodboard' | 'video' | 'bulletin' | null>(null);
 
+  const [showModal, setShowModal] = useState(false); // Для отображения модального окна
+  const [moodBoardName, setMoodBoardName] = useState(''); // Название mood board
+  const [savedMoodBoardName, setSavedMoodBoardName] = useState(''); // Сохраненное название Mood Board
+
   const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
@@ -55,6 +59,9 @@ const PersonalProfile: React.FC = () => {
           break;
         case 'moodboard':
           setMoodBoardFiles([...moodBoardFiles, ...filesArray]);
+          if (moodBoardFiles.length + filesArray.length >= 5) {
+            setShowModal(true); // Показать модальное окно при загрузке 5 файлов
+          }
           break;
         case 'video':
           setVideoFiles([...videoFiles, ...filesArray]);
@@ -66,13 +73,17 @@ const PersonalProfile: React.FC = () => {
     }
   };
 
+  const handleModalSubmit = () => {
+    setShowModal(false);
+    setSavedMoodBoardName(moodBoardName); // Сохраняем введенное название Mood Board
+  };
+
   const renderUploadedFiles = () => {
     let filesToDisplay: File[] = [];
 
     switch (uploadType) {
       case 'post':
         if (postFiles.length > 0) {
-          // Показывать аватар и имя пользователя, если загружены посты
           return (
             <div className="user-card-custom">
               <div className="user-info-custom">
@@ -105,27 +116,30 @@ const PersonalProfile: React.FC = () => {
     }
 
     return (
-      <div className="moodboard-grid-custom">
-        <div className="big-image-custom">
-          {filesToDisplay.length > 0 && (
-            <img
-              src={URL.createObjectURL(filesToDisplay[0])}
-              alt={filesToDisplay[0].name}
-              className="big-image-custom"
-            />
-          )}
-        </div>
-        <div className="small-images-custom">
-          {filesToDisplay.slice(1, 5).map((file, index) => (
-            <div key={index} className="small-image-custom">
+      <div>
+        <div className="moodboard-grid-custom">
+          <div className="big-image-custom">
+            {filesToDisplay.length > 0 && (
               <img
-                src={URL.createObjectURL(file)}
-                alt={file.name}
-                className="small-image-custom"
+                src={URL.createObjectURL(filesToDisplay[0])}
+                alt={filesToDisplay[0].name}
+                className="big-image-custom"
               />
-            </div>
-          ))}
+            )}
+          </div>
+          <div className="small-images-custom">
+            {filesToDisplay.slice(1, 5).map((file, index) => (
+              <div key={index} className="small-image-custom">
+                <img
+                  src={URL.createObjectURL(file)}
+                  alt={file.name}
+                  className="small-image-custom"
+                />
+              </div>
+            ))}
+          </div>
         </div>
+        {savedMoodBoardName && <h3 className="moodboard-title">{savedMoodBoardName}</h3>}
       </div>
     );
   };
@@ -147,7 +161,7 @@ const PersonalProfile: React.FC = () => {
                 </div>
               ) : (
                 <div className="avatar-placeholder">
-                  No Avatar
+                  No Avatar {/* Пустой контейнер для аватара, если изображение не загружено */}
                   <input type="file" accept="image/*" onChange={handleAvatarUpload} className="avatar-upload-button" />
                 </div>
               )}
@@ -231,6 +245,23 @@ const PersonalProfile: React.FC = () => {
           <span>Settings</span>
         </Link>
       </footer>
+
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>Enter Mood Board Name</h3>
+            <input
+              type="text"
+              value={moodBoardName}
+              onChange={(e) => setMoodBoardName(e.target.value)}
+              className="moodboard-name-input"
+            />
+            <button onClick={handleModalSubmit} className="modal-submit-button">
+              Save
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

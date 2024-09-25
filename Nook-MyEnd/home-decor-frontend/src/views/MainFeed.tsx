@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MoodBoardPreview from '../components/MoodBoardPreview';
-import SaveModal from '../components/SaveModal';
 import MoodBoardSelection from '../views/MoodBoardSelection'; // Новый компонент
 import '../css/MainFeed.css';
 import logoImage from '../assets/NookLogo.png';
@@ -21,23 +19,28 @@ import { fetchInteriorPhotos } from '../services/pexelsService';
 
 const MainFeed: React.FC = () => {
   const navigate = useNavigate();
-  const [isModalOpen, setModalOpen] = useState(false); // Управление модальным окном
+  const [isModalOpen, setModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [isSettingsMenuOpen, setSettingsMenuOpen] = useState(false);
 
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('authToken') !== null;
     if (!isAuthenticated) {
-      navigate('/login');
+      navigate('/signup'); // Redirect to sign-up page if not authenticated
     }
   }, [navigate]);
 
   const handleProfileClick = (username: string) => {
-    navigate(`/user-profile/${username}`);
+    if (username === 'Yelena_Jones') {
+      navigate(`/ph4`); // Перенаправление на профиль Yelena_Jones (PH4)
+    } else {
+      navigate(`/user-profile/${username}`); // Перенаправление на профили других пользователей
+    }
   };
 
   const handleSaveClick = () => {
-    setModalOpen(true); // Открываем модальное окно
+    setModalOpen(true);
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,14 +54,23 @@ const MainFeed: React.FC = () => {
     }
   };
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       handleSearch();
     }
   };
 
   const closeModal = () => {
-    setModalOpen(false); // Закрываем модальное окно
+    setModalOpen(false);
+  };
+
+  const toggleSettingsMenu = () => {
+    setSettingsMenuOpen(!isSettingsMenuOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    navigate('/signup');
   };
 
   const renderUserCard = (username: string, userImageClass: string, contentClass: string) => (
@@ -84,7 +96,7 @@ const MainFeed: React.FC = () => {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              handleSaveClick(); // Клик по кнопке Save открывает модальное окно
+              handleSaveClick();
             }}
           >
             <img src={SaveIcon} alt="Save" />
@@ -107,9 +119,8 @@ const MainFeed: React.FC = () => {
           className="search-input"
           value={searchTerm}
           onChange={handleSearchChange}
-          onKeyPress={handleKeyPress} // Поиск при нажатии Enter
+          onKeyDown={handleKeyDown} // Поиск при нажатии Enter
         />
-        {/* Кликабельная иконка лупы */}
         <div className="search-icon" onClick={handleSearch}></div> {/* Поиск при клике на лупу */}
       </div>
 
@@ -133,13 +144,13 @@ const MainFeed: React.FC = () => {
             <MoodBoardPreview name="Cottage Core" />
           </div>
           {renderUserCard('TammyDecorQueen', 'user-profile2', 'sampleimage-content')}
-          {renderUserCard('JeremyAllenDesigns', 'user-profile3', 'sampleimage1-content')}
-          {renderUserCard('Yelena_Jones', 'user-profile4', 'sampleimage2-content')}
-          {renderUserCard('VintageHouseDesigns', 'user-profile5', 'sampleimage3-content')}
+          {renderUserCard('JeremyAllenDesigns', 'sampleimage1-content', 'sampleimage1-content')}
+          {renderUserCard('Yelena_Jones', 'user-profile4', 'sampleimage2-content')} {/* Переход на профиль PH4 */}
+          {renderUserCard('VintageHouseDesigns', 'sampleimage3-content', 'sampleimage3-content')}
         </>
       )}
 
-      {isModalOpen && <MoodBoardSelection onClose={closeModal} />} {/* Включаем компонент MoodBoardSelection */}
+      {isModalOpen && <MoodBoardSelection onClose={closeModal} />}
 
       {/* Footer Menu */}
       <footer className="footer-navigation">
@@ -155,10 +166,20 @@ const MainFeed: React.FC = () => {
           <img src={uploadIcon} alt="Upload" />
           <span>Upload</span>
         </Link>
-        <Link to="/settings" className="footer-menu-item">
+        <div className="footer-menu-item" onClick={toggleSettingsMenu}>
           <img src={settingsIcon} alt="Settings" />
           <span>Settings</span>
-        </Link>
+          {isSettingsMenuOpen && (
+            <div className="settings-popup">
+              <Link to="/settings" className="settings-option">
+                Settings
+              </Link>
+              <div className="settings-option" onClick={handleLogout}>
+                Logout
+              </div>
+            </div>
+          )}
+        </div>
       </footer>
     </div>
   );

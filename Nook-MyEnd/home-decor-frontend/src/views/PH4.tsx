@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/PH4.css';
 
 import logoImage from '../assets/NookLogo.png';
-import profileImage from '../assets/user-profile4.jpg';
-import heartIcon from '../assets/LikeIconCopy.png'; // Кликабельное сердечко
+import profileImage from '../assets/user-profile4.jpg'; // Replace with current user's avatar if needed
+import heartIcon from '../assets/LikeIconCopy.png';
 import messageIcon from '../assets/message-icon.jpeg';
 import homeIcon from '../assets/home-icon.png';
 import profileIcon from '../assets/profile-icon.png';
@@ -22,12 +22,12 @@ import pink8 from '../assets/Pink8.jpeg';
 import pink9 from '../assets/Pink9.jpeg';
 import pink10 from '../assets/Pink10.jpeg';
 
-// Модальное окно
+// Modal Window
 const Modal: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   return (
     <div className="modal-backdrop">
       <div className="modal-content">
-        <h4>You liked Yelena_Jones content!</h4>
+        <h4>You liked Yelena_Jones' content!</h4>
         <button onClick={closeModal}>OK</button>
       </div>
     </div>
@@ -35,19 +35,30 @@ const Modal: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
 };
 
 const PH4: React.FC = () => {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('boards');
+  const [isFollowing, setIsFollowing] = useState(false); // State for follow button
+
+  // Fetch current user info from localStorage
+  const [currentUser, setCurrentUser] = useState<{ username: string } | null>(null);
+
+  useEffect(() => {
+    const user = localStorage.getItem('currentUser');
+    if (user) {
+      setCurrentUser(JSON.parse(user));
+    } else {
+      navigate('/signup'); // Redirect to sign-up if not logged in
+    }
+  }, [navigate]);
 
   const openModal = () => {
-    console.log('Heart icon clicked'); // Проверка клика
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
-  const [activeTab, setActiveTab] = useState('boards');
-  const [isFollowing, setIsFollowing] = useState(false); // State для follow button
 
   const toggleFollow = () => {
     setIsFollowing(!isFollowing);
@@ -98,7 +109,7 @@ const PH4: React.FC = () => {
             <img src={logoImage} alt="Nook Logo" className="nook-logo4" />
           </Link>
           <div className="icon-container">
-            <img src={heartIcon} alt="Likes" className="icon heart-icon" onClick={openModal} /> {/* Кликабельное сердечко */}
+            <img src={heartIcon} alt="Likes" className="icon heart-icon" onClick={openModal} />
             <img src={messageIcon} alt="Messages" className="icon" />
           </div>
         </header>
@@ -108,7 +119,7 @@ const PH4: React.FC = () => {
             <div className="profile-info">
               <img src={profileImage} alt="Profile" className="profile-img" />
               <div className="profile-details">
-                <h2>Yelena_Jones</h2>
+                <h2>{currentUser?.username || 'Guest'}</h2> {/* Using current user data */}
                 <p>
                   🌸 Lover of pink, pretty, and playful decor! Obsessed with soft pastels, and cozy textures. Always dreaming up chic, feminine vibes. Let’s connect! ✨
                 </p>
@@ -144,7 +155,7 @@ const PH4: React.FC = () => {
           <img src={homeIcon} alt="Home" />
           <span>Home</span>
         </Link>
-        <Link to="/personalprofile">
+        <Link to={`/user-profile/${currentUser?.username || 'default'}`}>
           <img src={profileIcon} alt="Profile" />
           <span>Profile</span>
         </Link>
