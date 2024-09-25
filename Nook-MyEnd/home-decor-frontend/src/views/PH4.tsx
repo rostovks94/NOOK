@@ -4,8 +4,7 @@ import '../css/PH4.css';
 
 import logoImage from '../assets/NookLogo.png';
 import profileImage from '../assets/user-profile4.jpg';
-
-import heartIcon from '../assets/LikeIcon.png';
+import heartIcon from '../assets/LikeIconCopy.png'; // Кликабельное сердечко
 import messageIcon from '../assets/message-icon.jpeg';
 import homeIcon from '../assets/home-icon.png';
 import profileIcon from '../assets/profile-icon.png';
@@ -23,12 +22,35 @@ import pink8 from '../assets/Pink8.jpeg';
 import pink9 from '../assets/Pink9.jpeg';
 import pink10 from '../assets/Pink10.jpeg';
 
+// Модальное окно
+const Modal: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
+  return (
+    <div className="modal-backdrop">
+      <div className="modal-content">
+        <h4>You liked Yelena_Jones content!</h4>
+        <button onClick={closeModal}>OK</button>
+      </div>
+    </div>
+  );
+};
+
 const PH4: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    console.log('Heart icon clicked'); // Проверка клика
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const [activeTab, setActiveTab] = useState('boards');
-  const [isFollowing, setIsFollowing] = useState(false); // State for follow button
+  const [isFollowing, setIsFollowing] = useState(false); // State для follow button
 
   const toggleFollow = () => {
-    setIsFollowing(!isFollowing); // Toggle between follow and following
+    setIsFollowing(!isFollowing);
   };
 
   const renderContent = () => {
@@ -47,9 +69,7 @@ const PH4: React.FC = () => {
                 <img src={pink5} alt="Pink decor 5" className="small-image" />
               </div>
             </div>
-
             <h3>All Pink Everything</h3>
-
             <div className="moodboard-grid">
               <img src={pink6} alt="Pink decor 6" className="big-image" />
               <div className="small-images">
@@ -78,7 +98,7 @@ const PH4: React.FC = () => {
             <img src={logoImage} alt="Nook Logo" className="nook-logo4" />
           </Link>
           <div className="icon-container">
-            <img src={heartIcon} alt="Likes" className="icon" />
+            <img src={heartIcon} alt="Likes" className="icon heart-icon" onClick={openModal} /> {/* Кликабельное сердечко */}
             <img src={messageIcon} alt="Messages" className="icon" />
           </div>
         </header>
@@ -115,9 +135,7 @@ const PH4: React.FC = () => {
             </button>
           </div>
 
-          <section className="content-section">
-            {renderContent()}
-          </section>
+          <section className="content-section">{renderContent()}</section>
         </div>
       </div>
 
@@ -139,6 +157,8 @@ const PH4: React.FC = () => {
           <span>Settings</span>
         </Link>
       </footer>
+
+      {isModalOpen && <Modal closeModal={closeModal} />}
     </div>
   );
 };

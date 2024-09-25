@@ -98,10 +98,6 @@ const MainFeed: React.FC = () => {
     <div className="main-feed">
       <div className="logo-avatar-container">
         <img src={logoImage} alt="Nook Logo" className="nook-logo" />
-        <div className="avatar-container">
-          <img src={LikeIcon} alt="Like Icon" className="header-icon" /> {/* Иконка лайка */}
-          <img src={MessageIcon} alt="Message Icon" className="header-icon" /> {/* Иконка сообщения */}
-        </div>
       </div>
 
       <div className="search-bar">
