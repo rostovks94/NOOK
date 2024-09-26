@@ -1,5 +1,5 @@
 import React from 'react';
-import bluecouch from '../assets/bluecouch.jpg'; // Импорт изображения
+import bluecouch from '../assets/bluecouch.jpg'; 
 import '../css/SaveConfirmation.css';
 
 interface SaveConfirmationProps {

@@ -1,31 +1,29 @@
-/* Overlay внутри основного контейнера */
 .create-moodboard-overlay {
   position: absolute;
   top: 0;
-  left: 0px; /* Сдвиг влево, чтобы учесть увеличение ширины */
-  width: 100%; /* Увеличение ширины на 5px */
-  height: 100%; /* Полная высота */
+  left: 0px; 
+  width: 100%; 
+  height: 100%; 
   background: rgba(243, 232, 205, 0.5);
   z-index: 1000;
-  display: flex; /* Центрирование модального окна */
+  display: flex; 
   justify-content: center;
   align-items: center;
   overflow: hidden;
   border-radius: inherit;
 }
 
-/* Модальное окно остается внутри overlay */
 .create-moodboard-container {
   position: relative;
-  width: 80%; /* Ширина модального окна */
-  max-width: 420px; /* Максимальная ширина модального окна */
+  width: 80%; 
+  max-width: 420px; 
   background-color: #fff;
   border-radius: 15px;
   padding: 25px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   border: 1px solid #2a6041;
   max-height: 80%;
-  margin-top: -1750px;
+  margin-top: -1850px;
   margin-left: 5px;
 }
 
@@ -53,17 +51,17 @@
 
 .create-moodboard-input-container {
   margin-bottom: 20px;
-  width: 100%; /* Увеличение ширины контейнера */
+  width: 100%; 
   margin-left: 25px; 
   margin-right: 20px;
   margin-top: 30px;
 }
 
 .create-moodboard-input {
-  width: 75%; /* Ширина поля ввода */
-  height: 30px; /* Увеличение высоты поля ввода */
+  width: 75%; 
+  height: 30px; 
   padding: 10px;
-  font-size: 16px; /* Увеличение размера шрифта */
+  font-size: 16px; 
   border: 2px solid #19653a !important;
   margin-left: -50px;
 }
@@ -79,7 +77,7 @@
 }
 
 .create-moodboard-toggle-label {
-  font-weight: bold; /* Жирный шрифт для "Secret Board" */
+  font-weight: bold;
   margin-right: 10px;
 }
 
@@ -88,7 +86,7 @@
   width: 35px;
   height: 18px;
   margin-right: 35px;
-  border: 2px solid #19653a; /* Ободок для переключателя */
+  border: 2px solid #19653a; 
   border-radius: 34px;
 }
 
@@ -132,7 +130,7 @@ input:checked + .slider:before {
   left: -50px;
   color: #2f4f4f; 
   width: 85%;
-  height: 60px; /* Увеличиваем высоту контейнера */
+  height: 60px; 
 }
 
 .create-moodboard-collaborators-search input {
@@ -140,8 +138,8 @@ input:checked + .slider:before {
   padding-right: 20px;
   border-radius: 20px;
   margin: 5px;
-  height: 30%; /* Устанавливаем высоту input равной высоте контейнера */
-  padding: 10px; /* Добавляем отступы для ввода текста */
+  height: 30%; 
+  padding: 10px;
 }
 
 .create-moodboard-search-icon {
@@ -154,8 +152,8 @@ input:checked + .slider:before {
   width: 24px;
   height: 24px;
   cursor: pointer;
-  top: 50%; /* Центрирование иконки по вертикали */
-  transform: translateY(-50%); /* Центрирование иконки по вертикали */
+  top: 50%; 
+  transform: translateY(-50%); 
 }
 
 .create-moodboard-button-container {
@@ -195,11 +193,54 @@ input:checked + .slider:before {
  
 
 }
-/* Стиль для заголовков контейнеров */
+
 .create-moodboard-label {
   font-size: 12px;
   color: #2f4f4f;
   margin-bottom: 5px;
   margin-right: 150px;
   
+}
+@media (max-width: 768px) {
+  .complete-signup-page {
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      margin-top: 0;
+  }
+
+  .complete-signup-logo {
+      width: 200px;
+      height: 80px;
+  }
+
+  .input-container input {
+      width: 100%;
+      height: 50px;
+  }
+
+  .create-account-button {
+      width: 100%;
+      height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .complete-signup-page {
+      padding: 10px;
+  }
+
+  .complete-signup-logo {
+      width: 150px;
+      height: 60px;
+  }
+
+  .input-container input {
+      height: 45px;
+  }
+
+  .create-account-button {
+      height: 45px;
+      font-size: 16px;
+  }
 }

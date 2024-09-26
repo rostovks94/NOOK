@@ -124,7 +124,7 @@ const PH4: React.FC = () => {
             <div className="profile-info">
               <img src={profileImage} alt="Profile" className="profile-img" />
               <div className="profile-details">
-                <h2>{currentUser?.username || 'Yelena_Jones'}</h2> {/* Имя пользователя теперь всегда "Yelena_Jones" */}
+                <h2>{currentUser?.username || 'Yelena_Jones'}</h2> 
                 <p>
                   🌸 Lover of pink, pretty, and playful decor! Obsessed with soft pastels, and cozy textures. Always dreaming up chic, feminine vibes. Let’s connect! ✨
                 </p>

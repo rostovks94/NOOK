@@ -57,7 +57,7 @@ ROOT_URLCONF = 'home_decor_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'home-decor-frontend' / 'dist'],  # Убедитесь, что это правильный путь
+        'DIRS': [BASE_DIR / 'home-decor-frontend' / 'dist'], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,4 +119,4 @@ STATICFILES_DIRS = [
 
 ]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Или другой путь, если нужно собрать файлы
+STATIC_ROOT = BASE_DIR / 'staticfiles' 

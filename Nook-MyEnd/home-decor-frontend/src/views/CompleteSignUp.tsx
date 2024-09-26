@@ -9,20 +9,17 @@ const CompleteSignUp: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const auth = getAuth(); // Инициализируем Firebase Auth
+  const auth = getAuth(); 
 
   const completeSignUpProcess = () => {
     if (email !== '' && username !== '' && password !== '' && password === confirmPassword) {
-      // Создание пользователя в Firebase
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          // Сохраняем имя пользователя через updateProfile
           const user = userCredential.user;
           updateProfile(user, {
             displayName: username,
           })
             .then(() => {
-              // Получаем токен и сохраняем его
               user.getIdToken().then((token) => {
                 localStorage.setItem('authToken', token);
                 localStorage.setItem('username', username);

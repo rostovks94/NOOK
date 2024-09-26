@@ -15,7 +15,6 @@ const CreateMoodBoard: React.FC<CreateMoodBoardProps> = ({ onClose }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Показать модальное окно подтверждения
     setShowSaveConfirmation(true);
   };
 

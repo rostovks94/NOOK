@@ -24,7 +24,7 @@ const PersonalProfile: React.FC = () => {
 
   const [postFiles, setPostFiles] = useState<File[]>([]);
   const [moodBoardFiles, setMoodBoardFiles] = useState<File[]>([]);
-  const [moodBoards, setMoodBoards] = useState<MoodBoard[]>([]); // Массив с mood boards
+  const [moodBoards, setMoodBoards] = useState<MoodBoard[]>([]); 
   const [videoFiles, setVideoFiles] = useState<File[]>([]);
   const [bulletinFiles, setBulletinFiles] = useState<File[]>([]);
   const [uploadType, setUploadType] = useState<'post' | 'moodboard' | 'video' | 'bulletin' | null>(null);
@@ -94,7 +94,7 @@ const PersonalProfile: React.FC = () => {
         name: moodBoardName,
         files: moodBoardFiles,
       };
-      setMoodBoards([...moodBoards, newMoodBoard]); // Сохраняем новый mood board
+      setMoodBoards([...moodBoards, newMoodBoard]); 
       setMoodBoardName('');
       setMoodBoardFiles([]);
       setShowModal(false);
@@ -106,7 +106,6 @@ const PersonalProfile: React.FC = () => {
       try {
         await updateProfile(user, { displayName: username });
         setIsEditingName(false);
-        // Обновляем имя пользователя в Firebase
         setUser({ ...user, displayName: username });
       } catch (error) {
         console.error('Error updating profile:', error);
