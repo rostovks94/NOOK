@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import '../css/PersonalProfile.css';
 import logoImage from '../assets/NookLogo.png';
 import homeIcon from '../assets/home-icon.png';
@@ -10,43 +10,36 @@ import settingsIcon from '../assets/settings-icon.png';
 
 const PersonalProfile: React.FC = () => {
   const auth = getAuth();
-  const user = auth.currentUser;
-
-  const [avatarPreview, setAvatarPreview] = useState<string | null>(
-    localStorage.getItem('userProfileAvatar') || null
-  );
-  const [bio, setBio] = useState<string>(
-    localStorage.getItem('userProfileBio') || ''
-  );
+  const [user, setUser] = useState<User | null>(null);
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+  const [bio, setBio] = useState<string>('');
   const [isEditingBio, setIsEditingBio] = useState(false);
-  const username = localStorage.getItem('username') || 'Your Name'; // Получение имени пользователя
+  const [username, setUsername] = useState('Your Name');
 
-  // Загружаем посты, mood boards, видео и объявления из localStorage
-  const [postFiles, setPostFiles] = useState<File[]>(
-    JSON.parse(localStorage.getItem('postFiles') || '[]')
-  );
-  const [moodBoardFiles, setMoodBoardFiles] = useState<File[]>(
-    JSON.parse(localStorage.getItem('moodBoardFiles') || '[]')
-  );
-  const [videoFiles, setVideoFiles] = useState<File[]>(
-    JSON.parse(localStorage.getItem('videoFiles') || '[]')
-  );
-  const [bulletinFiles, setBulletinFiles] = useState<File[]>(
-    JSON.parse(localStorage.getItem('bulletinFiles') || '[]')
-  );
+  const [postFiles, setPostFiles] = useState<File[]>([]);
+  const [moodBoardFiles, setMoodBoardFiles] = useState<File[]>([]);
+  const [savedMoodBoardNames, setSavedMoodBoardNames] = useState<string[]>([]); // Stores names for each mood board
+  const [videoFiles, setVideoFiles] = useState<File[]>([]);
+  const [bulletinFiles, setBulletinFiles] = useState<File[]>([]);
   const [uploadType, setUploadType] = useState<'post' | 'moodboard' | 'video' | 'bulletin' | null>(null);
 
   const [showModal, setShowModal] = useState(false);
   const [moodBoardName, setMoodBoardName] = useState('');
-  const [savedMoodBoardName, setSavedMoodBoardName] = useState(localStorage.getItem('savedMoodBoardName') || '');
 
   useEffect(() => {
-    // Сохраняем данные постов, mood boards и других файлов при их изменении
-    localStorage.setItem('postFiles', JSON.stringify(postFiles));
-    localStorage.setItem('moodBoardFiles', JSON.stringify(moodBoardFiles));
-    localStorage.setItem('videoFiles', JSON.stringify(videoFiles));
-    localStorage.setItem('bulletinFiles', JSON.stringify(bulletinFiles));
-  }, [postFiles, moodBoardFiles, videoFiles, bulletinFiles]);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        setUsername(currentUser.displayName || 'Your Name');
+      } else {
+        setUser(null);
+        setAvatarPreview(null);
+        setBio('');
+        setUsername('Your Name');
+      }
+    });
+    return () => unsubscribe();
+  }, [auth]);
 
   const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -69,7 +62,6 @@ const PersonalProfile: React.FC = () => {
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const filesArray = Array.from(e.target.files);
-
       switch (uploadType) {
         case 'post':
           setPostFiles([...postFiles, ...filesArray]);
@@ -77,7 +69,7 @@ const PersonalProfile: React.FC = () => {
         case 'moodboard':
           setMoodBoardFiles([...moodBoardFiles, ...filesArray]);
           if (moodBoardFiles.length + filesArray.length >= 5) {
-            setShowModal(true); // Показать модальное окно при загрузке 5 файлов
+            setShowModal(true);
           }
           break;
         case 'video':
@@ -91,75 +83,57 @@ const PersonalProfile: React.FC = () => {
   };
 
   const handleModalSubmit = () => {
-    setShowModal(false);
-    setSavedMoodBoardName(moodBoardName);
-    localStorage.setItem('savedMoodBoardName', moodBoardName); // Сохраняем введенное название Mood Board
+    if (moodBoardName) {
+      setShowModal(false);
+      setSavedMoodBoardNames([...savedMoodBoardNames, moodBoardName]); // Save mood board name
+      setMoodBoardName(''); // Clear modal input after submission
+    }
+  };
+
+  const renderMoodBoardGrid = () => {
+    return moodBoardFiles.length > 0 ? (
+      <div className="personal-moodboard-grid">
+        <div className="big-image">
+          <img src={URL.createObjectURL(moodBoardFiles[0])} alt={moodBoardFiles[0].name} />
+        </div>
+        <div className="small-images">
+          {moodBoardFiles.slice(1, 5).map((file, index) => (
+            <div key={index} className="small-image">
+              <img src={URL.createObjectURL(file)} alt={file.name} />
+            </div>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <div className="post-placeholder">
+        <p>No mood board uploaded yet. Upload your first mood board!</p>
+      </div>
+    );
   };
 
   const renderUploadedFiles = () => {
-    let filesToDisplay: File[] = [];
-
     switch (uploadType) {
-      case 'post':
-        if (postFiles.length > 0) {
-          return (
-            <div className="user-card-custom">
-              <div className="user-info-custom">
-                <div className="profile-picture-custom" style={{ backgroundImage: `url(${avatarPreview})` }} />
-                <h2>{user?.displayName || username}</h2>
-              </div>
-              <div className="user-content-grid-custom">
-                {postFiles.map((file, index) => (
-                  <div key={index} className="post-item">
-                    <img src={URL.createObjectURL(file)} alt={file.name} className="post-image-custom" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
-        } else {
-          return <p>No posts yet. Upload your first post!</p>;
-        }
       case 'moodboard':
-        filesToDisplay = moodBoardFiles;
-        break;
-      case 'video':
-        filesToDisplay = videoFiles;
-        break;
-      case 'bulletin':
-        filesToDisplay = bulletinFiles;
-        break;
+        return renderMoodBoardGrid();
+      case 'post':
+        return postFiles.length > 0 ? (
+          postFiles.map((file, index) => (
+            <div key={index} className="post-container">
+              <div className="user-info-custom">
+                <div className="profile-picture-custom" style={{ backgroundImage: `url(${avatarPreview})` }}></div>
+                <h2 className="user-name">{username}</h2>
+              </div>
+              <img src={URL.createObjectURL(file)} alt={file.name} className="post-image-custom" />
+            </div>
+          ))
+        ) : (
+          <div className="post-placeholder">
+            <p>No post uploaded yet. Upload your first post!</p>
+          </div>
+        );
       default:
         return null;
     }
-
-    return (
-      <div>
-        <div className="moodboard-grid-custom">
-          <div className="big-image-custom">
-            {filesToDisplay.length > 0 && (
-              <img
-                src={URL.createObjectURL(filesToDisplay[0])}
-                alt={filesToDisplay[0].name}
-                className="big-image-custom"
-              />
-            )}
-          </div>
-          <div className="small-images-custom">
-            {filesToDisplay.slice(1, 5).map((file, index) => (
-              <div key={index} className="small-image-custom">
-                <img
-                  src={URL.createObjectURL(file)}
-                  alt={file.name}
-                  className="small-image-custom"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-        {savedMoodBoardName && <h3 className="moodboard-title">{savedMoodBoardName}</h3>}
-      </div>
-    );
   };
 
   return (
@@ -188,18 +162,11 @@ const PersonalProfile: React.FC = () => {
               <h2 className="user-name">{username}</h2>
               <div className="bio-container">
                 {isEditingBio ? (
-                  <textarea
-                    value={bio}
-                    onChange={(e) => setBio(e.target.value)}
-                    className="bio-textarea"
-                  />
+                  <textarea value={bio} onChange={(e) => setBio(e.target.value)} className="bio-textarea" />
                 ) : (
                   <p className="bio-text">{bio}</p>
                 )}
-                <button
-                  onClick={() => setIsEditingBio(!isEditingBio)}
-                  className="edit-bio-button"
-                >
+                <button onClick={() => setIsEditingBio(!isEditingBio)} className="edit-bio-button">
                   {isEditingBio ? 'Save' : 'Edit'}
                 </button>
               </div>
@@ -207,28 +174,16 @@ const PersonalProfile: React.FC = () => {
           </header>
 
           <div className="profile-tabs">
-            <button
-              className={`profile-tab ${uploadType === 'post' ? 'active' : ''}`}
-              onClick={() => setUploadType('post')}
-            >
+            <button className={`profile-tab ${uploadType === 'post' ? 'active' : ''}`} onClick={() => setUploadType('post')}>
               Post
             </button>
-            <button
-              className={`profile-tab ${uploadType === 'moodboard' ? 'active' : ''}`}
-              onClick={() => setUploadType('moodboard')}
-            >
+            <button className={`profile-tab ${uploadType === 'moodboard' ? 'active' : ''}`} onClick={() => setUploadType('moodboard')}>
               Mood Board
             </button>
-            <button
-              className={`profile-tab ${uploadType === 'video' ? 'active' : ''}`}
-              onClick={() => setUploadType('video')}
-            >
+            <button className={`profile-tab ${uploadType === 'video' ? 'active' : ''}`} onClick={() => setUploadType('video')}>
               Videos
             </button>
-            <button
-              className={`profile-tab ${uploadType === 'bulletin' ? 'active' : ''}`}
-              onClick={() => setUploadType('bulletin')}
-            >
+            <button className={`profile-tab ${uploadType === 'bulletin' ? 'active' : ''}`} onClick={() => setUploadType('bulletin')}>
               Bulletin
             </button>
           </div>
@@ -249,14 +204,7 @@ const PersonalProfile: React.FC = () => {
         <label htmlFor="file-upload">
           <img src={uploadIcon} alt="Upload" />
           <span>Upload</span>
-          <input
-            id="file-upload"
-            type="file"
-            accept="image/*,video/*"
-            multiple
-            style={{ display: 'none' }}
-            onChange={handleFileUpload}
-          />
+          <input id="file-upload" type="file" accept="image/*,video/*" multiple style={{ display: 'none' }} onChange={handleFileUpload} />
         </label>
         <Link to="/settings">
           <img src={settingsIcon} alt="Settings" />
@@ -268,12 +216,7 @@ const PersonalProfile: React.FC = () => {
         <div className="modal-overlay">
           <div className="modal">
             <h3>Enter Mood Board Name</h3>
-            <input
-              type="text"
-              value={moodBoardName}
-              onChange={(e) => setMoodBoardName(e.target.value)}
-              className="moodboard-name-input"
-            />
+            <input type="text" value={moodBoardName} onChange={(e) => setMoodBoardName(e.target.value)} className="moodboard-name-input" />
             <button onClick={handleModalSubmit} className="modal-submit-button">
               Save
             </button>

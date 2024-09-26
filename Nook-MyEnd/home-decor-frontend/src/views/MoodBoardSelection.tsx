@@ -5,6 +5,7 @@ import groovyLivingRoomImage from '../assets/GroovyLivingRoom.jpg';
 import eclecticModernImage from '../assets/ElectricModern.jpg';
 import plusIcon from '../assets/plus.png';
 import CreateMoodBoard from './CreateMoodBoard';
+import SaveConfirmation from './SaveConfirmation';
 
 interface MoodBoardSelectionProps {
   onClose: () => void;
@@ -12,13 +13,23 @@ interface MoodBoardSelectionProps {
 
 const MoodBoardSelection: React.FC<MoodBoardSelectionProps> = ({ onClose }) => {
   const [showCreateMoodBoard, setShowCreateMoodBoard] = useState(false);
+  const [showSaveConfirmation, setShowSaveConfirmation] = useState(false);
 
   const handleCreateBoardClick = () => {
     setShowCreateMoodBoard(true);
   };
 
+  const handleSaveBoard = () => {
+    setShowCreateMoodBoard(false);
+    setShowSaveConfirmation(true);
+  };
+
   if (showCreateMoodBoard) {
-    return <CreateMoodBoard onClose={onClose} />;
+    return <CreateMoodBoard onClose={handleSaveBoard} />;
+  }
+
+  if (showSaveConfirmation) {
+    return <SaveConfirmation closeSaveConfirmation={onClose} />;
   }
 
   return (
@@ -51,4 +62,4 @@ const MoodBoardSelection: React.FC<MoodBoardSelectionProps> = ({ onClose }) => {
   );
 };
 
-export default MoodBoardSelection;  
+export default MoodBoardSelection;

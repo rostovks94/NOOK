@@ -13,7 +13,6 @@ import profileIcon from '../assets/profile-icon.png';
 import uploadIcon from '../assets/upload-icon.png';
 import settingsIcon from '../assets/settings-icon.png';
 
-
 import { fetchInteriorPhotos } from '../services/pexelsService';
 
 const MainFeed: React.FC = () => {
@@ -32,7 +31,7 @@ const MainFeed: React.FC = () => {
 
   const handleProfileClick = (username: string) => {
     if (username === 'Yelena_Jones') {
-      navigate('/ph4');
+      navigate('/user-profile/Yelena_Jones');  // Исправлено на правильный путь
     } else {
       navigate(`/user-profile/${username}`);
     }
@@ -120,8 +119,8 @@ const MainFeed: React.FC = () => {
           onChange={handleSearchChange}
           onKeyDown={handleKeyDown}
         />
-          <div className="search-icon" onClick={handleSearch}></div>
-          </div>
+        <div className="search-icon" onClick={handleSearch}></div>
+      </div>
 
       <button className="quiz-button take-quiz-button">Take Style Quiz</button>
 

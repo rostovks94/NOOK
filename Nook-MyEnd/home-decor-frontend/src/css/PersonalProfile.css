@@ -182,37 +182,30 @@
   border-bottom-right-radius: 50px;
 }
 
-.moodboard-grid-custom {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.personal-moodboard-grid {
+  display: flex;
   gap: 0;
-  height: 258px;
 }
 
-.big-image-custom {
-  grid-column: 1 / 2;
-  grid-row: 1 / 3;
-  width: 100%;
-  height: 100%;
+.big-image {
+  width: 50%;
+  height: 250px;
   object-fit: cover;
 }
 
-.small-images-custom {
+.small-images {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
+  width: 50%;
+  height: 250px;
   gap: 0;
-  width: 100%;
-  height: 100%;
 }
 
-.small-image-custom {
+.small-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: none;
-  margin: 0;
-  padding: 0;
 }
 
 .user-card-custom {
@@ -254,6 +247,7 @@
   width: 350px;
   height: 300px;
   object-fit: cover;
+  margin-top: 20px;
 }
 
 .profile-navigation {
@@ -335,29 +329,27 @@
   border-top: 1px solid #ddd;
 }
 
-/* Стили для модального окна */
-/* Стили для модального окна, ограниченного основным контейнером */
 .modal-overlay {
-  position: absolute; /* Абсолютное позиционирование внутри контейнера */
+  position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: auto;
-  /* background-color: rgba(251, 243, 170, 0.5); Полупрозрачный фон убран */
   display: flex;
   justify-content: center;
-  align-items: flex-end; /* Модальное окно отображается внизу */
-  z-index: 999; /* Поверх всего контента */
+  align-items: flex-end;
+  z-index: 999;
 }
 
 .modal {
   background-color: white;
   padding: 10px;
   border-radius: 10px;
-  width: 90%; /* Ширина окна в пределах 393px контейнера */
-  max-width: 300px; /* Максимальная ширина модального окна */
+  border-color: #004d3a;
+  width: 90%;
+  max-width: 300px;
   margin-bottom: 250px;
-  margin-right: 10px; /* Отступ от нижней границы контейнера */
+  margin-right: 10px;
 }
 
 .moodboard-name-input {

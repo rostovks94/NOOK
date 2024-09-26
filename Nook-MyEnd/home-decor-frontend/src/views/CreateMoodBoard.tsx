@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import bluecouch from '../assets/bluecouch.jpg';
 import '../css/CreateMoodBoard.css';
+import SaveConfirmation from './SaveConfirmation';
 
 interface CreateMoodBoardProps {
   onClose: () => void;
@@ -11,12 +11,17 @@ const CreateMoodBoard: React.FC<CreateMoodBoardProps> = ({ onClose }) => {
   const [boardName, setBoardName] = useState('');
   const [isSecret, setIsSecret] = useState(false);
   const [collaborators, setCollaborators] = useState('');
-  const navigate = useNavigate();
+  const [showSaveConfirmation, setShowSaveConfirmation] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/home-decor-app/save-confirmation');
+    // Показать модальное окно подтверждения
+    setShowSaveConfirmation(true);
   };
+
+  if (showSaveConfirmation) {
+    return <SaveConfirmation closeSaveConfirmation={onClose} />;
+  }
 
   return (
     <div className="create-moodboard-overlay" onClick={onClose}>
