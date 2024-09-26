@@ -15,12 +15,17 @@ import SaveModal from './components/SaveModal';
 // Функция для проверки авторизации пользователя
 const isAuthenticated = () => {
   const token = localStorage.getItem('authToken');
+  console.log('Token exists:', !!token); // Логирование для отладки
   return !!token; // Возвращает true, если токен существует
 };
 
 // Компонент для защиты приватных маршрутов
 const PrivateRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
-  return isAuthenticated() ? children : <Navigate to="/login" replace />;
+  const isAuth = isAuthenticated();
+  if (!isAuth) {
+    console.warn('User is not authenticated, redirecting to login'); // Предупреждение при неавторизованном доступе
+  }
+  return isAuth ? children : <Navigate to="/login" replace />;
 };
 
 const App: React.FC = () => {

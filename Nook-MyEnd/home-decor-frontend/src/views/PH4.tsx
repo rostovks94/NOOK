@@ -44,11 +44,16 @@ const PH4: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<{ username: string } | null>(null);
 
   useEffect(() => {
-    const user = localStorage.getItem('currentUser');
-    if (user) {
-      setCurrentUser(JSON.parse(user));
+    const token = localStorage.getItem('authToken'); // Проверяем наличие токена
+    if (!token) {
+      navigate('/signup'); // Если токен не найден, перенаправляем на страницу регистрации
     } else {
-      navigate('/signup'); // Redirect to sign-up if not logged in
+      const user = localStorage.getItem('currentUser');
+      if (user) {
+        setCurrentUser(JSON.parse(user)); // Загружаем данные пользователя
+      } else {
+        setCurrentUser({ username: 'Yelena_Jones' }); // Устанавливаем фиксированное имя пользователя
+      }
     }
   }, [navigate]);
 
@@ -119,7 +124,7 @@ const PH4: React.FC = () => {
             <div className="profile-info">
               <img src={profileImage} alt="Profile" className="profile-img" />
               <div className="profile-details">
-                <h2>{currentUser?.username || 'Guest'}</h2> {/* Using current user data */}
+                <h2>{currentUser?.username || 'Yelena_Jones'}</h2> {/* Имя пользователя теперь всегда "Yelena_Jones" */}
                 <p>
                   🌸 Lover of pink, pretty, and playful decor! Obsessed with soft pastels, and cozy textures. Always dreaming up chic, feminine vibes. Let’s connect! ✨
                 </p>
