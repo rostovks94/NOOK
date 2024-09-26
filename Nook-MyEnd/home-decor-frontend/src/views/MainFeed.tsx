@@ -12,7 +12,6 @@ import homeIcon from '../assets/home-icon.png';
 import profileIcon from '../assets/profile-icon.png';
 import uploadIcon from '../assets/upload-icon.png';
 import settingsIcon from '../assets/settings-icon.png';
-
 import { fetchInteriorPhotos } from '../services/pexelsService';
 
 const MainFeed: React.FC = () => {
@@ -30,11 +29,7 @@ const MainFeed: React.FC = () => {
   }, [navigate]);
 
   const handleProfileClick = (username: string) => {
-    if (username === 'Yelena_Jones') {
-      navigate('/user-profile/Yelena_Jones');  // Исправлено на правильный путь
-    } else {
-      navigate(`/user-profile/${username}`);
-    }
+    navigate(`/user-profile/${username}`);
   };
 
   const handleSaveClick = () => {

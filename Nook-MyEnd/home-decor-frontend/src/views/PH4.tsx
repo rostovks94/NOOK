@@ -22,7 +22,7 @@ import pink8 from '../assets/Pink8.jpeg';
 import pink9 from '../assets/Pink9.jpeg';
 import pink10 from '../assets/Pink10.jpeg';
 
-// Modal Window
+// Modal Window Component
 const Modal: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   return (
     <div className="modal-backdrop">

@@ -43,11 +43,7 @@ const App: React.FC = () => {
         <Route path="/savemodal" element={<PrivateRoute><SaveModal onClose={() => {}} /></PrivateRoute>} />
         <Route path="/personalprofile" element={<PrivateRoute><PersonalProfile /></PrivateRoute>} />
         <Route path="/save-confirmation" element={<SaveConfirmation />} />
-
-        {/* Профиль пользователя */}
-        <Route path="/user-profile/Yelena_Jones" element={<PrivateRoute><PH4 /></PrivateRoute>} />
-
-        {/* Маршрут по умолчанию на случай, если путь не найден */}
+        <Route path="/user-profile/:username" element={<PrivateRoute><PH4 /></PrivateRoute>} />
         <Route path="*" element={<Navigate to="/register" replace />} />
       </Routes>
     </Router>

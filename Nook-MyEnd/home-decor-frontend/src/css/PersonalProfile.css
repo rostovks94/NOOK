@@ -182,72 +182,38 @@
   border-bottom-right-radius: 50px;
 }
 
-.personal-moodboard-grid {
+.profile-moodboard-grid-custom {
   display: flex;
-  gap: 0;
+  width: 100%;
+  gap: 0; /* Убираем промежутки */
 }
 
-.big-image {
-  width: 50%;
-  height: 250px;
+.profile-big-image-custom {
+  width: 60%; /* 60% для большого изображения */
+  height: 250px; /* Фиксированная высота, чтобы соответствовать высоте маленьких изображений */
   object-fit: cover;
 }
 
-.small-images {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  width: 50%;
-  height: 250px;
-  gap: 0;
-}
-
-.small-image img {
+.profile-big-image-custom img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-.user-card-custom {
-  width: 100%;
-  max-width: none;
-  font-weight: 100 !important;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 40px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.user-info-custom {
-  display: flex;
-  align-items: center;
-  font-weight: 100 !important;
-  margin-top: 5px;
-  margin-bottom: -15px;
-  gap: 10px;
-}
-
-.profile-picture-custom {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center;
-}
-
-.user-content-grid-custom {
+.profile-small-images-custom {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 20px;
+  grid-template-columns: repeat(2, 1fr); /* Сетка из двух столбцов */
+  grid-template-rows: repeat(2, 1fr); /* Две строки */
+  width: 40%; /* Оставшиеся 40% для маленьких изображений */
+  height: 250px; /* Высота должна совпадать с высотой большого изображения */
+  gap: 0; /* Убираем промежутки */
 }
 
-.post-image-custom {
-  width: 350px;
-  height: 300px;
+.profile-small-image-custom img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  margin-top: 20px;
 }
 
 .profile-navigation {
@@ -298,37 +264,6 @@
   margin-top: 5px;
 }
 
-.settings-popup {
-  position: absolute;
-  bottom: 50px;
-  right: 10px;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 10;
-  width: 150px;
-}
-
-.settings-option {
-  padding: 15px;
-  cursor: pointer;
-  text-align: center;
-  color: #004d3a;
-  font-weight: 500;
-  text-decoration: none;
-  display: block;
-}
-
-.settings-option:hover {
-  background-color: #f1f1f1;
-  color: #004d3a;
-}
-
-.settings-option:last-child {
-  border-top: 1px solid #ddd;
-}
-
 .modal-overlay {
   position: absolute;
   bottom: 0;
@@ -345,7 +280,7 @@
   background-color: white;
   padding: 10px;
   border-radius: 10px;
-  border-color: #004d3a;
+  border: 2px solid #004d3a; /* Обводка цвета #004d3a */
   width: 90%;
   max-width: 300px;
   margin-bottom: 250px;
@@ -369,3 +304,64 @@
   cursor: pointer;
   width: 100%;
 }
+
+
+.modal-submit-button {
+  margin-top: 20px;
+  background-color: #004d3a;
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 5px;
+  border-color: #004d3a;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Новые стили для отображения аватара рядом с постом */
+.profile-avatar-username {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Расстояние между аватаром и именем */
+}
+
+.profile-user-avatar-post {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar-placeholder-post {
+  width: 50px;
+  height: 50px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #757575;
+  font-size: 14px;
+}
+.profile-user-name {
+  font-size: 18px;
+  font-weight: 100; /* Updated to make the font thinner */
+  color: #333;
+  margin-top: 25px;
+}
+.profile-post-image-custom {
+  width: 100%;
+  height: 300px; /* Уменьшаем высоту */
+  object-fit: cover;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.moodboard-section h3 {
+  font-weight: 100; /* Устанавливаем тонкий шрифт */
+  text-align: left; /* Выравниваем текст влево */
+  margin-left: 0; /* Убираем любые отступы, чтобы начать от левой границы */
+  color: #333; /* Можем сохранить цвет или задать новый */
+}
+

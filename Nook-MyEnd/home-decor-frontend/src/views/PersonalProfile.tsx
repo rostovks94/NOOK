@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, User, updateProfile } from 'firebase/auth';
 import '../css/PersonalProfile.css';
 import logoImage from '../assets/NookLogo.png';
 import homeIcon from '../assets/home-icon.png';
@@ -8,17 +8,23 @@ import profileIcon from '../assets/profile-icon.png';
 import uploadIcon from '../assets/upload-icon.png';
 import settingsIcon from '../assets/settings-icon.png';
 
+interface MoodBoard {
+  name: string;
+  files: File[];
+}
+
 const PersonalProfile: React.FC = () => {
   const auth = getAuth();
   const [user, setUser] = useState<User | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [bio, setBio] = useState<string>('');
   const [isEditingBio, setIsEditingBio] = useState(false);
+  const [isEditingName, setIsEditingName] = useState(false);
   const [username, setUsername] = useState('Your Name');
 
   const [postFiles, setPostFiles] = useState<File[]>([]);
   const [moodBoardFiles, setMoodBoardFiles] = useState<File[]>([]);
-  const [savedMoodBoardNames, setSavedMoodBoardNames] = useState<string[]>([]); // Stores names for each mood board
+  const [moodBoards, setMoodBoards] = useState<MoodBoard[]>([]); // Массив с mood boards
   const [videoFiles, setVideoFiles] = useState<File[]>([]);
   const [bulletinFiles, setBulletinFiles] = useState<File[]>([]);
   const [uploadType, setUploadType] = useState<'post' | 'moodboard' | 'video' | 'bulletin' | null>(null);
@@ -83,29 +89,47 @@ const PersonalProfile: React.FC = () => {
   };
 
   const handleModalSubmit = () => {
-    if (moodBoardName) {
+    if (moodBoardName && moodBoardFiles.length > 0) {
+      const newMoodBoard: MoodBoard = {
+        name: moodBoardName,
+        files: moodBoardFiles,
+      };
+      setMoodBoards([...moodBoards, newMoodBoard]); // Сохраняем новый mood board
+      setMoodBoardName('');
+      setMoodBoardFiles([]);
       setShowModal(false);
-      setSavedMoodBoardNames([...savedMoodBoardNames, moodBoardName]); // Save mood board name
-      setMoodBoardName(''); // Clear modal input after submission
     }
   };
 
-  const renderMoodBoardGrid = () => {
-    return moodBoardFiles.length > 0 ? (
-      <div className="personal-moodboard-grid">
-        <div className="big-image">
-          <img src={URL.createObjectURL(moodBoardFiles[0])} alt={moodBoardFiles[0].name} />
+  const handleNameEdit = async () => {
+    if (user && username.trim()) {
+      try {
+        await updateProfile(user, { displayName: username });
+        setIsEditingName(false);
+        // Обновляем имя пользователя в Firebase
+        setUser({ ...user, displayName: username });
+      } catch (error) {
+        console.error('Error updating profile:', error);
+      }
+    }
+  };
+
+  const renderMoodBoardGrid = (files: File[]) => {
+    return files.length > 0 ? (
+      <div className="profile-moodboard-grid-custom">
+        <div className="profile-big-image-custom">
+          <img src={URL.createObjectURL(files[0])} alt={files[0].name} />
         </div>
-        <div className="small-images">
-          {moodBoardFiles.slice(1, 5).map((file, index) => (
-            <div key={index} className="small-image">
+        <div className="profile-small-images-custom">
+          {files.slice(1, 5).map((file, index) => (
+            <div key={index} className="profile-small-image-custom">
               <img src={URL.createObjectURL(file)} alt={file.name} />
             </div>
           ))}
         </div>
       </div>
     ) : (
-      <div className="post-placeholder">
+      <div className="profile-post-placeholder">
         <p>No mood board uploaded yet. Upload your first mood board!</p>
       </div>
     );
@@ -114,26 +138,49 @@ const PersonalProfile: React.FC = () => {
   const renderUploadedFiles = () => {
     switch (uploadType) {
       case 'moodboard':
-        return renderMoodBoardGrid();
+        return renderMoodBoardGrid(moodBoardFiles);
       case 'post':
         return postFiles.length > 0 ? (
           postFiles.map((file, index) => (
-            <div key={index} className="post-container">
-              <div className="user-info-custom">
-                <div className="profile-picture-custom" style={{ backgroundImage: `url(${avatarPreview})` }}></div>
-                <h2 className="user-name">{username}</h2>
+            <div key={index} className="profile-post-container">
+              <div className="profile-user-info-custom">
+                <div className="profile-avatar-username">
+                  {avatarPreview ? (
+                    <img src={avatarPreview} alt="User Avatar" className="profile-user-avatar-post" />
+                  ) : (
+                    <div className="avatar-placeholder-post">No Avatar</div>
+                  )}
+                  <h2 className="profile-user-name">{username}</h2>
+                </div>
               </div>
-              <img src={URL.createObjectURL(file)} alt={file.name} className="post-image-custom" />
+              <img src={URL.createObjectURL(file)} alt={file.name} className="profile-post-image-custom" />
             </div>
           ))
         ) : (
-          <div className="post-placeholder">
+          <div className="profile-post-placeholder">
             <p>No post uploaded yet. Upload your first post!</p>
           </div>
         );
       default:
         return null;
     }
+  };
+
+  const renderMoodBoards = () => {
+    return moodBoards.length > 0 ? (
+      <div>
+        {moodBoards.map((moodBoard, index) => (
+          <div key={index} className="moodboard-section">
+            <h3>{moodBoard.name}</h3>
+            {renderMoodBoardGrid(moodBoard.files)}
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div className="profile-post-placeholder">
+        <p>No mood boards created yet.</p>
+      </div>
+    );
   };
 
   return (
@@ -159,7 +206,23 @@ const PersonalProfile: React.FC = () => {
               )}
             </div>
             <div className="user-details">
-              <h2 className="user-name">{username}</h2>
+              {isEditingName ? (
+                <>
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="username-input"
+                  />
+                  <button onClick={handleNameEdit} className="save-bio-button">
+                    Save
+                  </button>
+                </>
+              ) : (
+                <h2 className="user-name" onClick={() => setIsEditingName(true)}>
+                  {username}
+                </h2>
+              )}
               <div className="bio-container">
                 {isEditingBio ? (
                   <textarea value={bio} onChange={(e) => setBio(e.target.value)} className="bio-textarea" />
@@ -188,7 +251,7 @@ const PersonalProfile: React.FC = () => {
             </button>
           </div>
 
-          {renderUploadedFiles()}
+          {uploadType === 'moodboard' ? renderMoodBoards() : renderUploadedFiles()}
         </div>
       </div>
 
