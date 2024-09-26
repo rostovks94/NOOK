@@ -1,98 +1,177 @@
-/* Overlay для затемнения фона */
+/* Overlay внутри основного контейнера */
 .create-moodboard-overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 393px; /* Фиксированная ширина */
-  height: 852px; /* Фиксированная высота */
-  background: rgba(243, 232, 205, 0.5); /* Полупрозрачный фон с нужным цветом */
-  z-index: 1001; /* Задний план для overlay */
+  left: 0px; /* Сдвиг влево, чтобы учесть увеличение ширины */
+  width: 100%; /* Увеличение ширины на 5px */
+  height: 100%; /* Полная высота */
+  background: rgba(243, 232, 205, 0.5);
+  z-index: 1000;
+  display: flex; /* Центрирование модального окна */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: inherit;
 }
 
-/* Контейнер модального окна */
+/* Модальное окно остается внутри overlay */
 .create-moodboard-container {
-  position: fixed; /* Для того чтобы модальное окно оставалось на месте */
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -20%); /* Центрируем модальное окно */
-  width: 90%; /* Уменьшаем ширину для мобильных устройств */
-  max-width: 450px;
+  position: relative;
+  width: 80%; /* Ширина модального окна */
+  max-width: 420px; /* Максимальная ширина модального окна */
   background-color: #fff;
-  z-index: 1000; /* Модальное окно поверх overlay */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid #2a6041;
+  max-height: 80%;
+  margin-top: -1750px;
+  margin-left: 5px;
 }
 
-/* Изображение в модальном окне */
-.create-moodboard-modal-image {
-  width: 100%;
-  height: 150px;
+.create-moodboard-image {
+  width: 80%;
+  height: 180px;
   background-size: cover;
   background-position: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-right: 50px;
 }
 
-/* Входные поля */
-.create-moodboard-input-fields {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
+.create-moodboard-close-button {
+  position: absolute;
+  top: 5px;
+  right: 310px;
+  background: none;
+  border: none;
+  font-size: 50px;
+  cursor: pointer;
+  color: #19653a;
 }
 
-.create-moodboard-input-field {
+.create-moodboard-input-container {
+  margin-bottom: 20px;
+  width: 100%; /* Увеличение ширины контейнера */
+  margin-left: 25px; 
+  margin-right: 20px;
+  margin-top: 30px;
+}
+
+.create-moodboard-input {
+  width: 75%; /* Ширина поля ввода */
+  height: 30px; /* Увеличение высоты поля ввода */
   padding: 10px;
-  border: 2px solid #2f4f4f;
-  border-radius: 10px;
-  font-size: 16px;
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: 5px;
+  font-size: 16px; /* Увеличение размера шрифта */
+  border: 2px solid #19653a !important;
+  margin-left: -50px;
 }
 
-/* Переключатель секретного борда */
-.create-moodboard-toggle-switch {
+
+.create-moodboard-secret-toggle {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  margin-top: 10px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  margin-left: 30px;
+  color: #2f4f4f; 
 }
 
 .create-moodboard-toggle-label {
-  font-size: 16px;
+  font-weight: bold; /* Жирный шрифт для "Secret Board" */
   margin-right: 10px;
 }
 
-.create-moodboard-checkbox {
-  width: 40px;
-  height: 20px;
+.create-moodboard-toggle-switch {
+  position: relative;
+  width: 35px;
+  height: 18px;
+  margin-right: 35px;
+  border: 2px solid #19653a; /* Ободок для переключателя */
+  border-radius: 34px;
 }
 
-/* Метки (label) */
-.create-moodboard-label {
-  margin-bottom: 5px;
-  font-size: 16px;
-  color: #2f4f4f;
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  transition: 0.4s;
+  border-radius: 34px;
 }
 
-/* Контейнер для кнопок */
-.create-moodboard-buttons-container {
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 2px;
+  bottom: 2px;
+  background-color: #2f4f4f;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #ffffff;
+}
+
+input:checked + .slider:before {
+  transform: translateX(17px);
+}
+
+.create-moodboard-collaborators-search {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 50px;
+  left: -50px;
+  color: #2f4f4f; 
+  width: 85%;
+  height: 60px; /* Увеличиваем высоту контейнера */
+}
+
+.create-moodboard-collaborators-search input {
+  flex-grow: 1;
+  padding-right: 20px;
+  border-radius: 20px;
+  margin: 5px;
+  height: 30%; /* Устанавливаем высоту input равной высоте контейнера */
+  padding: 10px; /* Добавляем отступы для ввода текста */
+}
+
+.create-moodboard-search-icon {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  background-image: url('../assets/search-icon.png');
+  background-size: cover;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  top: 50%; /* Центрирование иконки по вертикали */
+  transform: translateY(-50%); /* Центрирование иконки по вертикали */
+}
+
+.create-moodboard-button-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-  width: 100%;
+  gap: 10px;
 }
 
-/* Кнопки */
 .create-moodboard-back-button,
-.create-moodboard-submit-button {
-  width: 45%;
-  padding: 10px;
-  border-radius: 50px;
-  font-size: 16px;
-  border: 2px solid #2f4f4f;
+.create-moodboard-create-button {
+  width: 30%;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 25px;
+  border: 1px solid #2f4f4f;
+  margin-top: 2dvh;
 }
 
 .create-moodboard-back-button {
@@ -100,13 +179,27 @@
   color: #2f4f4f;
 }
 
-.create-moodboard-submit-button {
+.create-moodboard-create-button {
   background-color: #6bff46;
   color: #2f4f4f;
 }
 
-/* Hover для кнопок */
 .create-moodboard-back-button:hover,
-.create-moodboard-submit-button:hover {
+.create-moodboard-create-button:hover {
   border-color: #2f4f4f;
+}
+
+.create-moodboard-toggle-label {
+  font-weight: bold;
+  margin-right: 10px;
+ 
+
+}
+/* Стиль для заголовков контейнеров */
+.create-moodboard-label {
+  font-size: 12px;
+  color: #2f4f4f;
+  margin-bottom: 5px;
+  margin-right: 150px;
+  
 }

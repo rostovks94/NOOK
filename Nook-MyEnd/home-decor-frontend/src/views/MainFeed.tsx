@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import MoodBoardPreview from '../components/MoodBoardPreview';
-import MoodBoardSelection from '../views/MoodBoardSelection'; // Новый компонент
+import MoodBoardSelection from '../views/MoodBoardSelection';
 import '../css/MainFeed.css';
 import logoImage from '../assets/NookLogo.png';
-
 import LikeIcon from '../assets/LikeIcon.png';
-import MessageIcon from '../assets/message-icon.jpeg'; // Иконка сообщения
 import ShareIcon from '../assets/ShareIcon.png';
 import CommentIcon from '../assets/CommentIcon.png';
 import SaveIcon from '../assets/SaveIcon.png';
@@ -14,6 +12,7 @@ import homeIcon from '../assets/home-icon.png';
 import profileIcon from '../assets/profile-icon.png';
 import uploadIcon from '../assets/upload-icon.png';
 import settingsIcon from '../assets/settings-icon.png';
+
 
 import { fetchInteriorPhotos } from '../services/pexelsService';
 
@@ -27,15 +26,15 @@ const MainFeed: React.FC = () => {
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('authToken') !== null;
     if (!isAuthenticated) {
-      navigate('/signup'); // Redirect to sign-up page if not authenticated
+      navigate('/signup');
     }
   }, [navigate]);
 
   const handleProfileClick = (username: string) => {
     if (username === 'Yelena_Jones') {
-      navigate(`/ph4`); // Перенаправление на профиль Yelena_Jones (PH4)
+      navigate('/ph4');
     } else {
-      navigate(`/user-profile/${username}`); // Перенаправление на профили других пользователей
+      navigate(`/user-profile/${username}`);
     }
   };
 
@@ -119,10 +118,10 @@ const MainFeed: React.FC = () => {
           className="search-input"
           value={searchTerm}
           onChange={handleSearchChange}
-          onKeyDown={handleKeyDown} // Поиск при нажатии Enter
+          onKeyDown={handleKeyDown}
         />
-        <div className="search-icon" onClick={handleSearch}></div> {/* Поиск при клике на лупу */}
-      </div>
+          <div className="search-icon" onClick={handleSearch}></div>
+          </div>
 
       <button className="quiz-button take-quiz-button">Take Style Quiz</button>
 
@@ -145,14 +144,13 @@ const MainFeed: React.FC = () => {
           </div>
           {renderUserCard('TammyDecorQueen', 'user-profile2', 'sampleimage-content')}
           {renderUserCard('JeremyAllenDesigns', 'sampleimage1-content', 'sampleimage1-content')}
-          {renderUserCard('Yelena_Jones', 'user-profile4', 'sampleimage2-content')} {/* Переход на профиль PH4 */}
+          {renderUserCard('Yelena_Jones', 'user-profile4', 'sampleimage2-content')}
           {renderUserCard('VintageHouseDesigns', 'sampleimage3-content', 'sampleimage3-content')}
         </>
       )}
 
       {isModalOpen && <MoodBoardSelection onClose={closeModal} />}
 
-      {/* Footer Menu */}
       <footer className="footer-navigation">
         <Link to="/home" className="footer-menu-item">
           <img src={homeIcon} alt="Home" />

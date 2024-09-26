@@ -4,7 +4,7 @@
 .moodboard-selection-modal {
   position: absolute;
   top: 130px;
-  left: 30px !important;
+  left: 27px !important;
   right: 15px !important;
   bottom: auto;
   width: calc(100% - 40px) !important;
@@ -14,6 +14,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000 !important;
+  margin-top: 10px;
 }
 
 /* Основной контейнер */
@@ -31,7 +32,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 393px;
-  height: 852px;
+  height: 900px;
   background: rgba(243, 232, 205, 0.5);
   z-index: 1001;
 }

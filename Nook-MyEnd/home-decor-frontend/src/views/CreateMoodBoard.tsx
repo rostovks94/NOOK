@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import bluecouch from '../assets/bluecouch.jpg'; // Импортируем изображение
+import bluecouch from '../assets/bluecouch.jpg';
 import '../css/CreateMoodBoard.css';
 
 interface CreateMoodBoardProps {
@@ -9,72 +9,71 @@ interface CreateMoodBoardProps {
 
 const CreateMoodBoard: React.FC<CreateMoodBoardProps> = ({ onClose }) => {
   const [boardName, setBoardName] = useState('');
-  const [category, setCategory] = useState('Living Room');
   const [isSecret, setIsSecret] = useState(false);
   const [collaborators, setCollaborators] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Логика для создания доски настроения
     navigate('/home-decor-app/save-confirmation');
   };
 
   return (
-    <div className="create-moodboard-modal">
-      <div className="moodboard-overlay" onClick={onClose}></div>
-      <div className="modal-content">
-        <button className="close-button" onClick={onClose}>×</button>
-        <div className="modal-image" style={{ backgroundImage: `url(${bluecouch})` }}></div>
+    <div className="create-moodboard-overlay" onClick={onClose}>
+      <div className="create-moodboard-container" onClick={(e) => e.stopPropagation()}>
+        <button className="create-moodboard-close-button" onClick={onClose}>
+          ×
+        </button>
+        <div
+          className="create-moodboard-image"
+          style={{ backgroundImage: `url(${bluecouch})` }}
+        ></div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="board-name">Name Your Board</label>
-          <input
-            id="board-name"
-            type="text"
-            placeholder="Enter board name"
-            className="input-field"
-            value={boardName}
-            onChange={(e) => setBoardName(e.target.value)}
-            required
-          />
-
-          <label htmlFor="category">Category</label>
-          <select
-            id="category"
-            className="input-field"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option>Living Room</option>
-            <option>Bedroom</option>
-            <option>Office</option>
-          </select>
-
-          <label className="toggle-switch">
+          <div className="create-moodboard-input-container">
+            <label htmlFor="board-name" className="create-moodboard-label">Enter Mood Board Name</label>
             <input
-              type="checkbox"
-              className="checkbox"
-              checked={isSecret}
-              onChange={() => setIsSecret(!isSecret)}
+              id="board-name"
+              type="text"
+              placeholder="Enter board name"
+              className="create-moodboard-input"
+              value={boardName}
+              onChange={(e) => setBoardName(e.target.value)}
+              required
             />
-            Secret Board
-          </label>
+          </div>
 
-          <label htmlFor="collaborators">Add Collaborators (optional)</label>
-          <input
-            id="collaborators"
-            type="text"
-            placeholder="Enter usernames"
-            className="input-field"
-            value={collaborators}
-            onChange={(e) => setCollaborators(e.target.value)}
-          />
+          <div className="create-moodboard-secret-toggle">
+            <label className="create-moodboard-toggle-label">Secret Board</label>
+            <label className="create-moodboard-toggle-switch">
+              <input
+                type="checkbox"
+                checked={isSecret}
+                onChange={() => setIsSecret(!isSecret)}
+              />
+              <span className="slider"></span>
+            </label>
+          </div>
 
-          <div className="buttons">
-            <button type="button" className="back-button" onClick={onClose}>
+          <div className="create-moodboard-input-container">
+            <label htmlFor="collaborators" className="create-moodboard-label">Add Collaborators (optional)</label>
+            <div className="create-moodboard-collaborators-search">
+              <input
+                id="collaborators"
+                type="text"
+                placeholder="Search"
+                className="create-moodboard-input"
+                value={collaborators}
+                onChange={(e) => setCollaborators(e.target.value)}
+              />
+              <button type="button" className="create-moodboard-search-icon"></button>
+            </div>
+          </div>
+
+          <div className="create-moodboard-button-container">
+            <button type="button" className="create-moodboard-back-button" onClick={onClose}>
               Back
             </button>
-            <button type="submit" className="create-button">
+            <button type="submit" className="create-moodboard-create-button">
               Create
             </button>
           </div>

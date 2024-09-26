@@ -51,4 +51,4 @@ const MoodBoardSelection: React.FC<MoodBoardSelectionProps> = ({ onClose }) => {
   );
 };
 
-export default MoodBoardSelection;
+export default MoodBoardSelection;  

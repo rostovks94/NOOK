@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import '../css/PersonalProfile.css';
@@ -19,17 +19,34 @@ const PersonalProfile: React.FC = () => {
     localStorage.getItem('userProfileBio') || ''
   );
   const [isEditingBio, setIsEditingBio] = useState(false);
-  const username = localStorage.getItem('username'); // Получение имени пользователя
+  const username = localStorage.getItem('username') || 'Your Name'; // Получение имени пользователя
 
-  const [postFiles, setPostFiles] = useState<File[]>([]);
-  const [moodBoardFiles, setMoodBoardFiles] = useState<File[]>([]);
-  const [videoFiles, setVideoFiles] = useState<File[]>([]);
-  const [bulletinFiles, setBulletinFiles] = useState<File[]>([]);
+  // Загружаем посты, mood boards, видео и объявления из localStorage
+  const [postFiles, setPostFiles] = useState<File[]>(
+    JSON.parse(localStorage.getItem('postFiles') || '[]')
+  );
+  const [moodBoardFiles, setMoodBoardFiles] = useState<File[]>(
+    JSON.parse(localStorage.getItem('moodBoardFiles') || '[]')
+  );
+  const [videoFiles, setVideoFiles] = useState<File[]>(
+    JSON.parse(localStorage.getItem('videoFiles') || '[]')
+  );
+  const [bulletinFiles, setBulletinFiles] = useState<File[]>(
+    JSON.parse(localStorage.getItem('bulletinFiles') || '[]')
+  );
   const [uploadType, setUploadType] = useState<'post' | 'moodboard' | 'video' | 'bulletin' | null>(null);
 
-  const [showModal, setShowModal] = useState(false); // Для отображения модального окна
-  const [moodBoardName, setMoodBoardName] = useState(''); // Название mood board
-  const [savedMoodBoardName, setSavedMoodBoardName] = useState(''); // Сохраненное название Mood Board
+  const [showModal, setShowModal] = useState(false);
+  const [moodBoardName, setMoodBoardName] = useState('');
+  const [savedMoodBoardName, setSavedMoodBoardName] = useState(localStorage.getItem('savedMoodBoardName') || '');
+
+  useEffect(() => {
+    // Сохраняем данные постов, mood boards и других файлов при их изменении
+    localStorage.setItem('postFiles', JSON.stringify(postFiles));
+    localStorage.setItem('moodBoardFiles', JSON.stringify(moodBoardFiles));
+    localStorage.setItem('videoFiles', JSON.stringify(videoFiles));
+    localStorage.setItem('bulletinFiles', JSON.stringify(bulletinFiles));
+  }, [postFiles, moodBoardFiles, videoFiles, bulletinFiles]);
 
   const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -75,7 +92,8 @@ const PersonalProfile: React.FC = () => {
 
   const handleModalSubmit = () => {
     setShowModal(false);
-    setSavedMoodBoardName(moodBoardName); // Сохраняем введенное название Mood Board
+    setSavedMoodBoardName(moodBoardName);
+    localStorage.setItem('savedMoodBoardName', moodBoardName); // Сохраняем введенное название Mood Board
   };
 
   const renderUploadedFiles = () => {
@@ -88,7 +106,7 @@ const PersonalProfile: React.FC = () => {
             <div className="user-card-custom">
               <div className="user-info-custom">
                 <div className="profile-picture-custom" style={{ backgroundImage: `url(${avatarPreview})` }} />
-                <h2>{user?.displayName || username || 'Your Name'}</h2> {/* Отображение имени пользователя */}
+                <h2>{user?.displayName || username}</h2>
               </div>
               <div className="user-content-grid-custom">
                 {postFiles.map((file, index) => (
@@ -161,13 +179,13 @@ const PersonalProfile: React.FC = () => {
                 </div>
               ) : (
                 <div className="avatar-placeholder">
-                  No Avatar {/* Пустой контейнер для аватара, если изображение не загружено */}
+                  No Avatar
                   <input type="file" accept="image/*" onChange={handleAvatarUpload} className="avatar-upload-button" />
                 </div>
               )}
             </div>
             <div className="user-details">
-              <h2 className="user-name">{username || 'Your Name'}</h2> {/* Отображение имени пользователя */}
+              <h2 className="user-name">{username}</h2>
               <div className="bio-container">
                 {isEditingBio ? (
                   <textarea
