@@ -31,8 +31,11 @@ git clone https://github.com/rostovks94/NOOK.git
 2. Install dependencies:
 ```bash 
 npm install
+```
 3. Run the project in development mode:
-```bash npm run dev
+```bash
+npm run dev
+```
 Open your browser and navigate to http://localhost:3000.
 For production, the project is deployed on Netlify.
 
