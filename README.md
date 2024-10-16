@@ -18,6 +18,7 @@ TypeScript: Strongly-typed JavaScript to ensure type safety
 CSS Modules: For modular and maintainable styles
 Netlify: Deployed on Netlify for quick and easy static hosting
 React Router: Used for handling navigation between components
+
 **Backend:**
 The backend API, which handles authentication and data retrieval, was not developed by me but is fully integrated into the project. This backend provides the necessary endpoints for managing data in the application.
 
