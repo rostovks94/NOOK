@@ -24,10 +24,11 @@ The backend API, which handles authentication and data retrieval, was not develo
 ## Getting Started
 To run this project locally:
 
-Clone the repository:
-bash
+1. Clone the repository:
+
 Copy code
-git clone https://github.com/rostovks94/NOOK.git
+```bash 
+git clone https://github.com/rostovks94/NOOK.git```
 Install dependencies:
 bash
 Copy code
