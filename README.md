@@ -25,17 +25,12 @@ The backend API, which handles authentication and data retrieval, was not develo
 To run this project locally:
 
 1. Clone the repository:
-
-Copy code
 ```bash 
-git clone https://github.com/rostovks94/NOOK.git```
-Install dependencies:
-bash
-Copy code
+git clone https://github.com/rostovks94/NOOK.git
+2. Install dependencies:
+```bash 
 npm install
-Run the project in development mode:
-bash
-Copy code
+3. Run the project in development mode:
 ```bash npm run dev
 Open your browser and navigate to http://localhost:3000.
 For production, the project is deployed on Netlify.
